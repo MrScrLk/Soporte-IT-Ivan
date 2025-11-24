@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>PixelFix IT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="Servicio técnico especializado en PCs y notebooks. Tarifas actualizadas a agosto 2025." />
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-mark">PFIT</span>
+      <span class="logo-text">PixelFix IT</span>
+    </div>
+
+    <a href="#catalogo" class="topbar-link">Ver catálogo</a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>PC & Notebook Care</h1>
+        <p>
+          Diagnóstico, formateo, limpieza profunda, armado de PCs, cambios de pantalla y mucho más.
+          <span class="highlight">Tarifas actualizadas a agosto 2025.</span>
+        </p>
+        <div class="hero-actions">
+          <a id="cta-whatsapp" class="btn-primary" href="#">
+            Chatear por WhatsApp
+          </a>
+          <span class="hero-note">Atención personalizada para equipos de escritorio y notebooks.</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <p class="hero-badge">IT Specialist</p>
+        <p class="hero-main">Más de 7 años de experiencia en soporte técnico.</p>
+        <p class="hero-sub">Ideal para empresas, freelancers y usuarios hogareños.</p>
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalogo">
+      <header class="catalogo-header">
+        <h2>Catálogo de servicios</h2>
+        <p>Elegí los arreglos que necesitás y armá tu presupuesto. Después lo enviás directo por WhatsApp.</p>
+
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="PC">Sólo PC</button>
+          <button class="filter-btn" data-filter="Notebook">Sólo Notebook</button>
+        </div>
+      </header>
+
+      <div id="cards-container" class="cards-grid">
+        <!-- Las cartas se generan por JS -->
+      </div>
+    </section>
+
+    <section class="cart" id="cart">
+      <h2>Carrito / Presupuesto</h2>
+
+      <ul id="cart-items" class="cart-items">
+        <li class="cart-empty">Todavía no agregaste servicios.</li>
+      </ul>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total estimado:</span>
+          <span id="cart-total">$0</span>
+        </div>
+        <button id="whatsapp-btn" class="btn-primary btn-full">
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="cart-note">
+          Los precios son orientativos en ARS y pueden variar según diagnóstico final.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Servicio técnico de PC & Notebook · Precios freelance · Actualizado agosto 2025</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
