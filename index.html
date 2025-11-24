@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>PixelFix IT - Servicio Técnico</title>
+  <title>PixelGame IT - Servicio Técnico PC & Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-        content="Servicio técnico especializado en PCs y notebooks. Tarifas freelance actualizadas a agosto de 2025, con garantía y descuento por cantidad." />
+        content="PixelGame IT - Servicio técnico profesional para PCs y notebooks. Presupuestos claros, garantía de 3 meses y soporte remoto y a domicilio." />
 
   <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,116 +17,236 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header__brand">
-      <div class="site-header__mark">PFIT</div>
-      <div>
-        <div class="site-header__title">PixelFix IT &amp; Notebook</div>
-        <div class="site-header__subtitle">Servicio técnico especializado</div>
+  <!-- BARRA SUPERIOR -->
+  <header class="pg-header">
+    <div class="pg-header__brand">
+      <div class="pg-header__logo">
+        <span class="pg-header__logo-main">PG</span>
+        <span class="pg-header__logo-sub">IT</span>
+      </div>
+      <div class="pg-header__text">
+        <span class="pg-header__name">PixelGame IT</span>
+        <span class="pg-header__tagline">Soporte técnico PC &amp; Notebook</span>
       </div>
     </div>
 
-    <div class="site-header__right">
-      <a href="#servicios" class="chip-link">Ver servicios</a>
-      <button id="whatsapp-hero" class="btn-primary btn-small">
+    <nav class="pg-header__nav">
+      <a href="#servicios" class="pg-nav__link">Servicios</a>
+      <a href="#about" class="pg-nav__link">Acerca de mí</a>
+      <a href="#work" class="pg-nav__link">Trabajos</a>
+      <button id="whatsapp-hero" class="pg-btn pg-btn--primary pg-btn--small">
         Consultar por WhatsApp
       </button>
-    </div>
+    </nav>
   </header>
 
-  <main>
+  <main class="pg-main">
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero__text">
-        <h1>Mantenimiento y reparación de PC &amp; Notebook</h1>
-        <p>
-          Formateos, limpieza interna, armado de PCs, cambio de pantallas y más.
-          <span class="hero__highlight">Precios freelance, actualizados a agosto 2025.</span>
+    <section class="pg-hero" id="inicio">
+      <div class="pg-hero__left">
+        <h1>
+          Mantenimiento profesional para
+          <span class="pg-hero__highlight">PCs y notebooks</span>
+        </h1>
+        <p class="pg-hero__lead">
+          Diagnóstico, formateo, limpieza profunda, armado de PCs y reparaciones
+          sobre hardware, con enfoque técnico y documentación clara de cada trabajo.
         </p>
-        <ul class="hero__bullets">
-          <li>Atención a domicilio y remoto</li>
-          <li>Presupuestos claros antes de avanzar</li>
-          <li>Más de 7 años de experiencia en soporte IT</li>
-          <li><strong>Todos los servicios incluyen 3 meses de garantía</strong>
-              sobre el trabajo realizado.</li>
+        <ul class="pg-hero__list">
+          <li>Precios freelance actualizados a agosto 2025.</li>
+          <li>Atención remota y a domicilio para usuarios y empresas.</li>
+          <li>Más de 7 años de experiencia en soporte IT.</li>
+          <li><strong>Todos los servicios incluyen 3 meses de garantía</strong> sobre el trabajo realizado.</li>
         </ul>
       </div>
 
-      <div class="hero__card">
-        <p class="hero__badge">Resumen rápido</p>
-        <div class="hero__row">
-          <span>Formateo + limpieza completa desde</span>
-          <strong>$51.892</strong>
+      <div class="pg-hero__right">
+        <div class="pg-hero__card">
+          <div class="pg-hero__meta">
+            <span class="pg-hero__badge">Resumen rápido</span>
+            <span class="pg-hero__code">pixelgame.it / services</span>
+          </div>
+
+          <div class="pg-hero__grid">
+            <div class="pg-hero__metric">
+              <span class="pg-hero__metric-label">Formateo + limpieza</span>
+              <span class="pg-hero__metric-value">$51.892</span>
+            </div>
+            <div class="pg-hero__metric">
+              <span class="pg-hero__metric-label">Armado PC gamer</span>
+              <span class="pg-hero__metric-value">$77.838</span>
+            </div>
+            <div class="pg-hero__metric">
+              <span class="pg-hero__metric-label">Visita urgente</span>
+              <span class="pg-hero__metric-value">$45.406</span>
+            </div>
+            <div class="pg-hero__metric">
+              <span class="pg-hero__metric-label">Garantía</span>
+              <span class="pg-hero__metric-value">3 meses</span>
+            </div>
+          </div>
+
+          <p class="pg-hero__note">
+            Valores orientativos en ARS. El presupuesto final se confirma luego del diagnóstico.
+          </p>
         </div>
-        <div class="hero__row">
-          <span>Armado de PC gamer</span>
-          <strong>$77.838</strong>
-        </div>
-        <div class="hero__row">
-          <span>Visita urgente fuera de horario</span>
-          <strong>$45.406</strong>
-        </div>
-        <p class="hero__note">
-          Valores orientativos en ARS. Puede variar según diagnóstico.
-        </p>
       </div>
     </section>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <section class="content" id="servicios">
-      <div class="content__main">
-        <div class="toolbar">
-          <h2>Servicios disponibles</h2>
-          <div class="toolbar__filters">
-            <button class="filter-btn js-filter active" data-filter="all">Todos</button>
-            <button class="filter-btn js-filter" data-filter="PC">Sólo PC</button>
-            <button class="filter-btn js-filter" data-filter="Notebook">Sólo Notebook</button>
-          </div>
+    <!-- SERVICIOS + CARRITO -->
+    <section class="pg-section pg-section--split" id="servicios">
+      <div class="pg-section__header">
+        <div>
+          <h2>Servicios y tarifas</h2>
+          <p class="pg-section__subtitle">
+            Elegí los servicios que necesitás, armá tu carrito y enviá el detalle por WhatsApp.
+            A partir de 3 equipos iguales por servicio se aplica descuento automático.
+          </p>
         </div>
-        <p class="toolbar__info">
-          Elegí los trabajos que necesitás, armá tu presupuesto y enviámelo por WhatsApp.
-          A partir de 3 equipos iguales por servicio tenés un descuento automático.
-        </p>
 
-        <div id="service-list" class="service-grid">
-          <!-- JS inyecta las cartas -->
+        <div class="pg-filters">
+          <button class="pg-filter js-filter pg-filter--active" data-filter="all">Todos</button>
+          <button class="pg-filter js-filter" data-filter="PC">Sólo PC</button>
+          <button class="pg-filter js-filter" data-filter="Notebook">Sólo Notebook</button>
         </div>
       </div>
 
-      <aside class="content__cart" id="cart-panel">
-        <h3>Carrito / Presupuesto</h3>
-        <ul id="cart-items" class="cart-list">
-          <li class="cart-list__empty">Todavía no agregaste servicios.</li>
-        </ul>
+      <div class="pg-split">
+        <!-- LISTA DE SERVICIOS -->
+        <div class="pg-services">
+          <div id="service-list" class="pg-services__grid">
+            <!-- JS inyecta las tarjetas -->
+          </div>
+        </div>
 
-        <div class="cart-summary">
-          <div class="cart-summary__row">
-            <span>Subtotal</span>
-            <strong id="cart-subtotal">$0</strong>
+        <!-- CARRITO / PRESUPUESTO -->
+        <aside class="pg-cart" id="cart-panel">
+          <div class="pg-cart__header">
+            <h3>Carrito / Presupuesto</h3>
+            <span class="pg-cart__badge">Descuento por cantidad activo</span>
           </div>
-          <div class="cart-summary__row cart-summary__row--discount">
-            <span>Descuento por cantidad</span>
-            <strong id="cart-discount">-$0</strong>
+
+          <ul id="cart-items" class="pg-cart__items">
+            <li class="pg-cart__empty">Todavía no agregaste servicios.</li>
+          </ul>
+
+          <div class="pg-cart__summary">
+            <div class="pg-cart__row">
+              <span>Subtotal</span>
+              <strong id="cart-subtotal">$0</strong>
+            </div>
+            <div class="pg-cart__row pg-cart__row--discount">
+              <span>Descuento por cantidad</span>
+              <strong id="cart-discount">-$0</strong>
+            </div>
+            <div class="pg-cart__row pg-cart__row--total">
+              <span>Total estimado</span>
+              <strong id="cart-total">$0</strong>
+            </div>
+            <button id="send-whatsapp" class="pg-btn pg-btn--primary pg-btn--full">
+              Enviar pedido por WhatsApp
+            </button>
+            <p class="pg-cart__note">
+              Los montos son referenciales en ARS y pueden ajustarse según revisión del equipo.
+              Todos los servicios incluyen <strong>3 meses de garantía</strong> sobre la reparación.
+            </p>
           </div>
-          <div class="cart-summary__row cart-summary__row--total">
-            <span>Total estimado</span>
-            <strong id="cart-total">$0</strong>
-          </div>
-          <button id="send-whatsapp" class="btn-primary btn-full">
-            Enviar listado por WhatsApp
-          </button>
-          <p class="cart-summary__note">
-            Los montos son referenciales en ARS y se confirman al revisar el equipo.
-            <br>Todos los servicios incluyen <strong>3 meses de garantía</strong>
-            sobre la reparación realizada.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ACERCA DE MÍ -->
+    <section class="pg-section" id="about">
+      <div class="pg-section__header">
+        <h2>Acerca de mí</h2>
+        <p class="pg-section__subtitle">
+          Un poco más de contexto sobre quién está detrás de PixelGame IT.
+        </p>
+      </div>
+
+      <div class="pg-about">
+        <div class="pg-about__main">
+          <h3>Hola, soy Gabriel Iván Ferreyra</h3>
+          <p>
+            Técnico de soporte IT con más de 7 años de experiencia trabajando con usuarios finales,
+            empresas y equipos de tecnología. Me especializo en diagnóstico de hardware,
+            mantenimiento preventivo y correctivo, armado de PCs y soporte sobre entornos Windows.
+          </p>
+          <p>
+            Además de la parte técnica, doy mucha importancia a la comunicación:
+            explico cada paso, dejo registro de lo que se hizo y entrego el equipo
+            con recomendaciones para evitar futuras fallas.
           </p>
         </div>
-      </aside>
+
+        <div class="pg-about__details">
+          <ul>
+            <li><span class="label">Experiencia:</span> +7 años en soporte IT</li>
+            <li><span class="label">Equipos:</span> PCs de escritorio y notebooks</li>
+            <li><span class="label">Modalidad:</span> remoto, en laboratorio y a domicilio</li>
+            <li><span class="label">Extras:</span> documentación del trabajo y consejos de uso</li>
+          </ul>
+          <div class="pg-about__callout">
+            <p>¿Sos empresa o tenés varios equipos?</p>
+            <p><strong>Podemos armar un plan de mantenimiento periódico</strong> a medida.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRABAJOS REALIZADOS -->
+    <section class="pg-section" id="work">
+      <div class="pg-section__header">
+        <h2>Trabajos realizados</h2>
+        <p class="pg-section__subtitle">
+          Algunas referencias visuales que podés actualizar con tus propias fotos:
+          limpiezas internas, armado de PCs, cambios de pantalla, etc.
+        </p>
+      </div>
+
+      <div class="pg-work">
+        <!-- reemplazá las imágenes por tus fotos reales -->
+        <figure class="pg-work__item">
+          <div class="pg-work__thumb">
+            <img src="img/trabajo-1.jpg" alt="Limpieza interna de PC de escritorio" />
+          </div>
+          <figcaption>
+            Limpieza completa de PC de escritorio, cambio de pasta térmica y reordenamiento de cables.
+          </figcaption>
+        </figure>
+
+        <figure class="pg-work__item">
+          <div class="pg-work__thumb">
+            <img src="img/trabajo-2.jpg" alt="Armado de PC gamer" />
+          </div>
+          <figcaption>
+            Armado de PC gamer con airflow optimizado y configuración inicial de Windows y drivers.
+          </figcaption>
+        </figure>
+
+        <figure class="pg-work__item">
+          <div class="pg-work__thumb">
+            <img src="img/trabajo-3.jpg" alt="Reparación de notebook y cambio de pantalla" />
+          </div>
+          <figcaption>
+            Reparación de notebook, cambio de pantalla y limpieza interna del sistema de refrigeración.
+          </figcaption>
+        </figure>
+
+        <figure class="pg-work__item">
+          <div class="pg-work__thumb">
+            <img src="img/trabajo-4.jpg" alt="Configuración de red y router" />
+          </div>
+          <figcaption>
+            Configuración de router, WiFi y red cableada para hogar/oficina con varias PCs.
+          </figcaption>
+        </figure>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>PixelFix IT &amp; Notebook · Servicio técnico de confianza para PC y notebooks · Agosto 2025</p>
+  <footer class="pg-footer">
+    <p>PixelGame IT · Servicio técnico especializado en PC &amp; Notebook · Precios actualizados agosto 2025</p>
   </footer>
 
   <!-- JS -->
