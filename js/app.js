@@ -195,7 +195,7 @@ const services = [
   }
 ];
 
-// --- Utilidades DOM ---
+// --- DOM ---
 
 const serviceListEl = document.getElementById("service-list");
 const filterButtons = document.querySelectorAll(".js-filter");
@@ -220,30 +220,30 @@ function formatCurrency(value) {
   }
 }
 
-// --- Render de servicios ---
+// --- RENDER SERVICIOS ---
 
 function createServiceCard(service) {
   const tagsHtml = service.tags
     .map(tag => {
-      const className = tag === "PC" ? "tag--pc" : "tag--nb";
-      return `<span class="tag ${className}">${tag}</span>`;
+      const cls = tag === "PC" ? "pg-tag--pc" : "pg-tag--nb";
+      return `<span class="pg-tag ${cls}">${tag}</span>`;
     })
     .join("");
 
-  const trimmedTitle =
+  const title =
     service.name.length > 64 ? service.name.slice(0, 61) + "..." : service.name;
 
   return `
-    <article class="service-card" data-tags="${service.tags.join(",")}">
-      <h3 class="service-card__title">${trimmedTitle}</h3>
-      <div class="service-card__tags">${tagsHtml}</div>
-      <p class="service-card__desc">${service.desc}</p>
-      <div class="service-card__footer">
-        <div class="service-card__price">
+    <article class="pg-service-card" data-tags="${service.tags.join(",")}">
+      <h3 class="pg-service__title">${title}</h3>
+      <div class="pg-service__tags">${tagsHtml}</div>
+      <p class="pg-service__desc">${service.desc}</p>
+      <div class="pg-service__footer">
+        <div class="pg-service__price">
           ${formatCurrency(service.price)}
           <span>precio freelance</span>
         </div>
-        <button class="service-card__btn" data-add="${service.id}">
+        <button class="pg-service__btn" data-add="${service.id}">
           Agregar al carrito
         </button>
       </div>
@@ -258,7 +258,7 @@ function renderServices(filter = "all") {
   serviceListEl.innerHTML = selected.map(createServiceCard).join("");
 }
 
-// --- Carrito ---
+// --- CARRITO ---
 
 function addToCart(id) {
   const svc = services.find(s => s.id === id);
@@ -282,7 +282,6 @@ function cartSubtotal() {
   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
-// Descuento por cantidad: si un mismo servicio tiene 3 o más unidades
 function cartDiscount() {
   return cart.reduce((sum, item) => {
     if (item.qty >= DISCOUNT_THRESHOLD) {
@@ -301,7 +300,7 @@ function cartTotal() {
 function renderCart() {
   if (cart.length === 0) {
     cartItemsEl.innerHTML =
-      '<li class="cart-list__empty">Todavía no agregaste servicios.</li>';
+      '<li class="pg-cart__empty">Todavía no agregaste servicios.</li>';
     cartSubtotalEl.textContent = "$0";
     cartDiscountEl.textContent = "-$0";
     cartTotalEl.textContent = "$0";
@@ -311,16 +310,16 @@ function renderCart() {
   const itemsHtml = cart
     .map(
       item => `
-      <li class="cart-item">
-        <div class="cart-item__main">
-          <span class="cart-item__name">${item.name}</span>
-          <span class="cart-item__meta">
+      <li class="pg-cart__item">
+        <div class="pg-cart__main">
+          <span class="pg-cart__name">${item.name}</span>
+          <span class="pg-cart__meta">
             x${item.qty} · ${formatCurrency(item.price)} c/u
           </span>
         </div>
-        <div class="cart-item__side">
-          <span class="badge-qty">${item.qty}</span>
-          <button class="cart-item__remove" data-remove="${item.id}" title="Quitar">
+        <div class="pg-cart__side">
+          <span class="pg-badge-qty">${item.qty}</span>
+          <button class="pg-cart__remove" data-remove="${item.id}" title="Quitar">
             ✕
           </button>
         </div>
@@ -340,7 +339,7 @@ function renderCart() {
   cartTotalEl.textContent = formatCurrency(total);
 }
 
-// --- WhatsApp ---
+// --- WHATSAPP ---
 
 function buildWhatsappMessage() {
   if (cart.length === 0) {
@@ -378,35 +377,32 @@ function openWhatsapp() {
   window.open(url, "_blank");
 }
 
-// --- Eventos ---
+// --- EVENTOS ---
 
-// Filtros
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+    filterButtons.forEach(b => b.classList.remove("pg-filter--active"));
+    btn.classList.add("pg-filter--active");
     renderServices(btn.dataset.filter);
   });
 });
 
-// Click en tarjetas (delegado)
 serviceListEl.addEventListener("click", e => {
   const btn = e.target.closest("[data-add]");
   if (!btn) return;
   addToCart(btn.dataset.add);
 });
 
-// Quitar del carrito
 cartItemsEl.addEventListener("click", e => {
   const btn = e.target.closest("[data-remove]");
   if (!btn) return;
   removeFromCart(btn.dataset.remove);
 });
 
-// Botones WhatsApp
 sendWhatsappBtn.addEventListener("click", openWhatsapp);
 whatsappHeroBtn.addEventListener("click", openWhatsapp);
 
-// Init
+// --- INIT ---
+
 renderServices("all");
 renderCart();
