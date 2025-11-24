@@ -1,5 +1,8 @@
 const WHATSAPP_NUMBER = "5491112345678";
 
+const DISCOUNT_THRESHOLD = 3;   // a partir de cuántas unidades del mismo servicio
+const DISCOUNT_RATE = 0.1;      // 10% de descuento
+
 const services = [
   {
     id: "diagnostico",
@@ -197,6 +200,8 @@ const services = [
 const serviceListEl = document.getElementById("service-list");
 const filterButtons = document.querySelectorAll(".js-filter");
 const cartItemsEl = document.getElementById("cart-items");
+const cartSubtotalEl = document.getElementById("cart-subtotal");
+const cartDiscountEl = document.getElementById("cart-discount");
 const cartTotalEl = document.getElementById("cart-total");
 const sendWhatsappBtn = document.getElementById("send-whatsapp");
 const whatsappHeroBtn = document.getElementById("whatsapp-hero");
@@ -273,14 +278,32 @@ function removeFromCart(id) {
   renderCart();
 }
 
-function cartTotal() {
+function cartSubtotal() {
   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+// Descuento por cantidad: si un mismo servicio tiene 3 o más unidades
+function cartDiscount() {
+  return cart.reduce((sum, item) => {
+    if (item.qty >= DISCOUNT_THRESHOLD) {
+      sum += item.price * item.qty * DISCOUNT_RATE;
+    }
+    return sum;
+  }, 0);
+}
+
+function cartTotal() {
+  const subtotal = cartSubtotal();
+  const discount = cartDiscount();
+  return Math.max(0, subtotal - discount);
 }
 
 function renderCart() {
   if (cart.length === 0) {
     cartItemsEl.innerHTML =
       '<li class="cart-list__empty">Todavía no agregaste servicios.</li>';
+    cartSubtotalEl.textContent = "$0";
+    cartDiscountEl.textContent = "-$0";
     cartTotalEl.textContent = "$0";
     return;
   }
@@ -307,15 +330,26 @@ function renderCart() {
     .join("");
 
   cartItemsEl.innerHTML = itemsHtml;
-  cartTotalEl.textContent = formatCurrency(cartTotal());
+
+  const subtotal = cartSubtotal();
+  const discount = cartDiscount();
+  const total = cartTotal();
+
+  cartSubtotalEl.textContent = formatCurrency(subtotal);
+  cartDiscountEl.textContent = discount > 0 ? "-" + formatCurrency(discount) : "-$0";
+  cartTotalEl.textContent = formatCurrency(total);
 }
 
 // --- WhatsApp ---
 
 function buildWhatsappMessage() {
   if (cart.length === 0) {
-    return "Hola, quiero consultar por un servicio técnico para mi PC/notebook.";
+    return "Hola, quiero consultar por un servicio técnico para mi PC/notebook. Todos los trabajos incluyen 3 meses de garantía.";
   }
+
+  const subtotal = cartSubtotal();
+  const discount = cartDiscount();
+  const total = cartTotal();
 
   let msg = "Hola, quiero pedir presupuesto por estos servicios:%0A";
   cart.forEach(item => {
@@ -323,8 +357,17 @@ function buildWhatsappMessage() {
       item.price * item.qty
     )}%0A`;
   });
-  msg += `%0ATotal estimado: ${formatCurrency(cartTotal())}%0A`;
+
+  msg += `%0ASubtotal: ${formatCurrency(subtotal)}%0A`;
+  if (discount > 0) {
+    msg += `Descuento por cantidad (${DISCOUNT_RATE * 100}% desde ${DISCOUNT_THRESHOLD} equipos iguales): -${formatCurrency(
+      discount
+    )}%0A`;
+  }
+  msg += `Total estimado: ${formatCurrency(total)}%0A`;
   msg += "%0AEquipo(s): PC / Notebook";
+  msg += "%0AIncluye 3 meses de garantía sobre la reparación.";
+
   return msg;
 }
 
