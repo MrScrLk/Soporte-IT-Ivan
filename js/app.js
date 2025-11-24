@@ -20,7 +20,7 @@ const services = [
     name: "Limpieza + formateo + programas + BackUp + cambio a SSD",
     tags: ["PC", "Notebook"],
     price: 51892,
-    desc: "Servicio completo: limpieza, reinstalación, programas básicos y migración a SSD."
+    desc: "Limpieza interna, reinstalación, programas básicos y migración a SSD."
   },
   {
     id: "backup-extra",
@@ -41,7 +41,7 @@ const services = [
     name: "Instalación de programa OpenSource x1",
     tags: ["PC", "Notebook"],
     price: 10378,
-    desc: "Instalación y ajuste de un software libre (por ejemplo, LibreOffice, GIMP)."
+    desc: "Instalación y ajuste de un software libre (LibreOffice, GIMP, etc.)."
   },
   {
     id: "inst-comercial",
@@ -118,7 +118,7 @@ const services = [
     name: "Armado de PC gamer desde 0",
     tags: ["PC"],
     price: 77838,
-    desc: "Armado profesional de PC gamer, airflow y cable management."
+    desc: "Armado profesional de PC gamer con buen airflow y cable management."
   },
   {
     id: "cambio-hw-pc",
@@ -192,14 +192,14 @@ const services = [
   }
 ];
 
-// --- Utilidades ---
+// --- Utilidades DOM ---
 
-const cardsContainer = document.getElementById("cards-container");
-const cartItemsList = document.getElementById("cart-items");
+const serviceListEl = document.getElementById("service-list");
+const filterButtons = document.querySelectorAll(".js-filter");
+const cartItemsEl = document.getElementById("cart-items");
 const cartTotalEl = document.getElementById("cart-total");
-const filterButtons = document.querySelectorAll(".filter-btn");
-const whatsappBtn = document.getElementById("whatsapp-btn");
-const ctaWhatsapp = document.getElementById("cta-whatsapp");
+const sendWhatsappBtn = document.getElementById("send-whatsapp");
+const whatsappHeroBtn = document.getElementById("whatsapp-hero");
 
 let cart = [];
 
@@ -215,81 +215,72 @@ function formatCurrency(value) {
   }
 }
 
-// --- Render de cartas ---
+// --- Render de servicios ---
 
-function createCard(service) {
+function createServiceCard(service) {
   const tagsHtml = service.tags
     .map(tag => {
-      const cls = tag === "PC" ? "pc" : "notebook";
-      return `<span class="tag ${cls}">${tag}</span>`;
+      const className = tag === "PC" ? "tag--pc" : "tag--nb";
+      return `<span class="tag ${className}">${tag}</span>`;
     })
     .join("");
 
-  const titleShort =
-    service.name.length > 56 ? service.name.slice(0, 53) + "..." : service.name;
+  const trimmedTitle =
+    service.name.length > 64 ? service.name.slice(0, 61) + "..." : service.name;
 
   return `
-    <article class="card" data-tags="${service.tags.join(",")}">
-      <div class="card-header">
-        <div>
-          <h3 class="card-title">${titleShort}</h3>
-          <div class="card-tags">${tagsHtml}</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <p class="card-desc">${service.desc}</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-price">
+    <article class="service-card" data-tags="${service.tags.join(",")}">
+      <h3 class="service-card__title">${trimmedTitle}</h3>
+      <div class="service-card__tags">${tagsHtml}</div>
+      <p class="service-card__desc">${service.desc}</p>
+      <div class="service-card__footer">
+        <div class="service-card__price">
           ${formatCurrency(service.price)}
-          <span>freelance</span>
+          <span>precio freelance</span>
         </div>
-        <button class="card-btn" data-id="${service.id}">
-          Añadir al carrito
+        <button class="service-card__btn" data-add="${service.id}">
+          Agregar al carrito
         </button>
       </div>
     </article>
   `;
 }
 
-function renderCards(filter = "all") {
-  const normalizedFilter = filter.toLowerCase();
-  const filtered = services.filter(service =>
-    normalizedFilter === "all"
-      ? true
-      : service.tags.includes(filter)
+function renderServices(filter = "all") {
+  const selected = services.filter(service =>
+    filter === "all" ? true : service.tags.includes(filter)
   );
-
-  cardsContainer.innerHTML = filtered.map(createCard).join("");
+  serviceListEl.innerHTML = selected.map(createServiceCard).join("");
 }
 
 // --- Carrito ---
 
-function addToCart(serviceId) {
-  const service = services.find(s => s.id === serviceId);
-  if (!service) return;
+function addToCart(id) {
+  const svc = services.find(s => s.id === id);
+  if (!svc) return;
 
-  const existing = cart.find(item => item.id === serviceId);
+  const existing = cart.find(item => item.id === id);
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ id: service.id, name: service.name, price: service.price, qty: 1 });
+    cart.push({ id: svc.id, name: svc.name, price: svc.price, qty: 1 });
   }
   renderCart();
 }
 
-function removeFromCart(serviceId) {
-  cart = cart.filter(item => item.id !== serviceId);
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
   renderCart();
 }
 
-function getCartTotal() {
+function cartTotal() {
   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
 function renderCart() {
   if (cart.length === 0) {
-    cartItemsList.innerHTML = '<li class="cart-empty">Todavía no agregaste servicios.</li>';
+    cartItemsEl.innerHTML =
+      '<li class="cart-list__empty">Todavía no agregaste servicios.</li>';
     cartTotalEl.textContent = "$0";
     return;
   }
@@ -298,15 +289,15 @@ function renderCart() {
     .map(
       item => `
       <li class="cart-item">
-        <div class="cart-item-main">
-          <span class="cart-item-name">${item.name}</span>
-          <span class="cart-item-meta">
+        <div class="cart-item__main">
+          <span class="cart-item__name">${item.name}</span>
+          <span class="cart-item__meta">
             x${item.qty} · ${formatCurrency(item.price)} c/u
           </span>
         </div>
-        <div class="cart-item-actions">
-          <span class="qty-badge">${item.qty}</span>
-          <button class="cart-remove" data-remove="${item.id}" title="Quitar">
+        <div class="cart-item__side">
+          <span class="badge-qty">${item.qty}</span>
+          <button class="cart-item__remove" data-remove="${item.id}" title="Quitar">
             ✕
           </button>
         </div>
@@ -315,8 +306,8 @@ function renderCart() {
     )
     .join("");
 
-  cartItemsList.innerHTML = itemsHtml;
-  cartTotalEl.textContent = formatCurrency(getCartTotal());
+  cartItemsEl.innerHTML = itemsHtml;
+  cartTotalEl.textContent = formatCurrency(cartTotal());
 }
 
 // --- WhatsApp ---
@@ -326,15 +317,15 @@ function buildWhatsappMessage() {
     return "Hola, quiero consultar por un servicio técnico para mi PC/notebook.";
   }
 
-  let message = "Hola, quiero pedir presupuesto por estos servicios:%0A";
+  let msg = "Hola, quiero pedir presupuesto por estos servicios:%0A";
   cart.forEach(item => {
-    message += `- ${item.name} (x${item.qty}) - ${formatCurrency(
+    msg += `- ${item.name} (x${item.qty}) - ${formatCurrency(
       item.price * item.qty
     )}%0A`;
   });
-  message += `%0ATotal estimado: ${formatCurrency(getCartTotal())}%0A`;
-  message += "%0AEquipo(s): PC / Notebook";
-  return message;
+  msg += `%0ATotal estimado: ${formatCurrency(cartTotal())}%0A`;
+  msg += "%0AEquipo(s): PC / Notebook";
+  return msg;
 }
 
 function openWhatsapp() {
@@ -344,39 +335,35 @@ function openWhatsapp() {
   window.open(url, "_blank");
 }
 
-// --- Listeners ---
+// --- Eventos ---
 
-// botones de filtro
+// Filtros
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     filterButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    renderCards(btn.dataset.filter);
+    renderServices(btn.dataset.filter);
   });
 });
 
-// clicks en cartas (event delegation)
-cardsContainer.addEventListener("click", event => {
-  const button = event.target.closest(".card-btn");
-  if (!button) return;
-  const id = button.dataset.id;
-  addToCart(id);
+// Click en tarjetas (delegado)
+serviceListEl.addEventListener("click", e => {
+  const btn = e.target.closest("[data-add]");
+  if (!btn) return;
+  addToCart(btn.dataset.add);
 });
 
-// quitar del carrito
-cartItemsList.addEventListener("click", event => {
-  const btn = event.target.closest("[data-remove]");
+// Quitar del carrito
+cartItemsEl.addEventListener("click", e => {
+  const btn = e.target.closest("[data-remove]");
   if (!btn) return;
   removeFromCart(btn.dataset.remove);
 });
 
-// WhatsApp
-whatsappBtn.addEventListener("click", openWhatsapp);
-ctaWhatsapp.addEventListener("click", event => {
-  event.preventDefault();
-  openWhatsapp();
-});
+// Botones WhatsApp
+sendWhatsappBtn.addEventListener("click", openWhatsapp);
+whatsappHeroBtn.addEventListener("click", openWhatsapp);
 
-// --- Init ---
-renderCards("all");
+// Init
+renderServices("all");
 renderCart();
