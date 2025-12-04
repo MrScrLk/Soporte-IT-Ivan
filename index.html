@@ -2,329 +2,1150 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>PixelGame IT - Servicio Técnico PC & Notebook</title>
+  <title>Portfolio | Gabriel Ivan Ferreyra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="PixelGame IT - Servicio técnico profesional para PCs y notebooks. Presupuestos claros, garantía de 3 meses y soporte remoto y a domicilio." />
+  <meta name="description" content="Portfolio de Gabriel Ivan Ferreyra, técnico de soporte IT y administrador de Microsoft 365 con experiencia en migraciones, soporte a usuarios y documentación.">
+  <style>
+    :root {
+      --bg-page: #f3f4f6;
+      --bg-section: #ffffff;
+      --bg-soft: #eef2ff;
+      --bg-chip: #e5f3ff;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.08);
+      --primary-strong: #1d4ed8;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.08);
+      --text-main: #020617;
+      --text-muted: #6b7280;
+      --border-soft: #e5e7eb;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+      --radius-card: 20px;
+      --radius-pill: 999px;
+      --transition-fast: 180ms ease-out;
+      --transition-med: 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/styles.css" />
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #dbeafe 0, #f3f4f6 40%, #e5e7eb 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 80px 16px 64px;
+    }
+
+    /* NAVBAR --------------------------------------------------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 250, 252, 0.96),
+        rgba(248, 250, 252, 0.9),
+        transparent
+      );
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    .navbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: conic-gradient(
+        from 180deg,
+        #2563eb,
+        #f97316,
+        #22c55e,
+        #6366f1,
+        #2563eb
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .logo-badge span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .logo-text-main {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 767px) {
+      .navbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .nav-links {
+        width: 100%;
+        font-size: 12px;
+        gap: 10px;
+      }
+    }
+
+    /* SECCIONES BASE ------------------------------------------- */
+    section {
+      margin-top: 64px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .section-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 22px;
+    }
+
+    /* HERO ----------------------------------------------------- */
+    .hero {
+      display: grid;
+      gap: 28px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: 1.4fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #22c55e, #16a34a);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 4vw, 38px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      color: #020617;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, var(--primary-strong), var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      color: #111827;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), color var(--transition-fast),
+        border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, var(--primary), var(--primary-strong));
+      color: #f9fafb;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(209, 213, 219, 1);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: #0f172a;
+      color: #f9fafb;
+      border-color: #0f172a;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.4);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-panel {
+      border-radius: 26px;
+      background: linear-gradient(145deg, #0f172a, #1e293b);
+      color: #e5e7eb;
+      padding: 18px 18px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.35), transparent 65%),
+        radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.3), transparent 65%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-panel-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .hero-status {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+    }
+
+    .hero-chip {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-stats {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .stat-card {
+      padding: 10px 11px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      font-size: 12px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+      color: #e5e7eb;
+    }
+
+    .stat-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .stat-pill {
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+    }
+
+    /* SERVICIOS ------------------------------------------------ */
+    .services-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .services-layout {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 700px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-card {
+      position: relative;
+      background: var(--bg-section);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 16px 14px 14px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      transition: transform var(--transition-med), box-shadow var(--transition-med),
+        border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at top, rgba(37, 99, 235, 0.16), transparent 60%);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--transition-med), transform var(--transition-med);
+      pointer-events: none;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      border-color: rgba(129, 140, 248, 0.9);
+      background: #f9fafb;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .service-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #0f172a;
+    }
+
+    .service-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .service-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-chip);
+      color: #0f172a;
+      border: 1px solid rgba(191, 219, 254, 0.8);
+    }
+
+    .services-side-card {
+      background: linear-gradient(145deg, #0f172a, #1e293b);
+      border-radius: var(--radius-card);
+      padding: 16px 16px 16px;
+      color: #e5e7eb;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .services-side-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .services-side-card p {
+      font-size: 13px;
+      color: #cbd5f5;
+      margin-bottom: 10px;
+    }
+
+    .services-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .services-badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+    }
+
+    .services-note {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* SKILLS --------------------------------------------------- */
+    .skills-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 800px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .skills-group {
+      background: var(--bg-section);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 14px 14px 14px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .skills-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skills-chip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-soft);
+      color: #1e293b;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .skills-list span {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
+    }
+
+    /* EXPERIENCIA (timeline) ----------------------------------- */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      bottom: 2px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      opacity: 0.4;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 18px;
+      padding-left: 16px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
+    }
+
+    .timeline-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .timeline-role {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .timeline-company {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .timeline-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .timeline-text {
+      font-size: 13px;
+      color: #111827;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .timeline-tag {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: var(--radius-pill);
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+    }
+
+    /* PROYECTOS ------------------------------------------------ */
+    .projects-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      padding-right: 6px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .projects-strip::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .projects-strip::-webkit-scrollbar-track {
+      background: rgba(209, 213, 219, 0.6);
+      border-radius: 999px;
+    }
+
+    .projects-strip::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .project-card {
+      min-width: 260px;
+      max-width: 320px;
+      flex: 0 0 auto;
+      background: var(--bg-section);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 14px 14px 14px;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+      scroll-snap-align: start;
+      transition: transform var(--transition-med), box-shadow var(--transition-med),
+        border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+      border-color: rgba(129, 140, 248, 0.9);
+      background: #f9fafb;
+    }
+
+    .project-pill {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: #9a3412;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #0f172a;
+    }
+
+    .project-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-text {
+      font-size: 13px;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+    }
+
+    /* EDUCACIÓN ------------------------------------------------ */
+    .edu-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 800px) {
+      .edu-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .edu-card {
+      background: var(--bg-section);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 12px;
+      font-size: 13px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .edu-year {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .edu-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .edu-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* CONTACTO ------------------------------------------------- */
+    .contact-card {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 28px;
+      padding: 18px 18px 18px;
+      color: #f9fafb;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.25), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(15, 23, 42, 0.4), transparent 60%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-inner p {
+      font-size: 14px;
+      max-width: 520px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-link {
+      font-size: 13px;
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #f9fafb;
+    }
+
+    /* ANIMACIÓN SCROLL ----------------------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 420ms ease-out, transform 420ms ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-  <!-- BARRA SUPERIOR -->
-  <header class="pg-header">
-    <div class="pg-header__brand">
-      <div class="pg-header__logo">
-        <span class="pg-header__logo-main">PG</span>
-        <span class="pg-header__logo-sub">IT</span>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">
+        <div class="logo-badge"><span>IF</span></div>
+        <div>
+          <div class="logo-text-main">Gabriel Ivan Ferreyra</div>
+          <div class="logo-text-sub">Soporte IT · Admin Microsoft 365</div>
+        </div>
       </div>
-      <div class="pg-header__text">
-        <span class="pg-header__name">PixelGame IT</span>
-        <span class="pg-header__tagline">Soporte técnico PC &amp; Notebook</span>
-      </div>
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#skills">Habilidades</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#educacion">Formación</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
     </div>
-
-    <nav class="pg-header__nav">
-      <a href="#servicios" class="pg-nav__link">Servicios</a>
-      <a href="#about" class="pg-nav__link">Acerca de mí</a>
-      <a href="#work" class="pg-nav__link">Trabajos</a>
-      <button id="whatsapp-hero" class="pg-btn pg-btn--primary pg-btn--small">
-        Consultar por WhatsApp
-      </button>
-    </nav>
   </header>
 
-  <main class="pg-main">
+  <main class="page">
     <!-- HERO -->
-    <section class="pg-hero" id="inicio">
-      <div class="pg-hero__left">
-        <h1>
-          Mantenimiento profesional para
-          <span class="pg-hero__highlight">PCs y notebooks</span>
-        </h1>
-        <p class="pg-hero__lead">
-          Diagnóstico, formateo, limpieza profunda, armado de PCs y reparaciones
-          sobre hardware, con enfoque técnico y documentación clara de cada trabajo.
-        </p>
-        <ul class="pg-hero__list">
-          <li>Precios freelance actualizados a agosto 2025.</li>
-          <li>Atención remota y a domicilio para usuarios y empresas.</li>
-          <li>Más de 7 años de experiencia en soporte IT.</li>
-          <li><strong>Todos los servicios incluyen 3 meses de garantía</strong> sobre el trabajo realizado.</li>
-        </ul>
-      </div>
-
-      <div class="pg-hero__right">
-        <div class="pg-hero__card">
-          <div class="pg-hero__meta">
-            <span class="pg-hero__badge">Resumen rápido</span>
-            <span class="pg-hero__code">pixelgame.it / services</span>
-          </div>
-
-          <div class="pg-hero__grid">
-            <div class="pg-hero__metric">
-              <span class="pg-hero__metric-label">Formateo + limpieza</span>
-              <span class="pg-hero__metric-value">$58.119</span>
-            </div>
-            <div class="pg-hero__metric">
-              <span class="pg-hero__metric-label">Armado PC gamer</span>
-              <span class="pg-hero__metric-value">$87.179</span>
-            </div>
-            <div class="pg-hero__metric">
-              <span class="pg-hero__metric-label">Visita urgente</span>
-              <span class="pg-hero__metric-value">$50.854</span>
-            </div>
-            <div class="pg-hero__metric">
-              <span class="pg-hero__metric-label">Garantía</span>
-              <span class="pg-hero__metric-value">3 meses</span>
-            </div>
-          </div>
-
-          <p class="pg-hero__note">
-            Valores orientativos en ARS. El presupuesto final se confirma luego del diagnóstico.
-          </p>
+    <section id="inicio" class="hero">
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Disponible para nuevas oportunidades en soporte IT & M365
         </div>
+        <h1 class="hero-title">
+          Soporte IT y <span>Administración de Microsoft 365</span> con foco en usuarios, orden y proyectos.
+        </h1>
+        <p class="hero-subtitle">
+          Acompaño a empresas y equipos en su día a día tecnológico: desde el soporte de hardware y software,
+          hasta migraciones a Microsoft 365, documentación y mejora de procesos.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">+7 años de experiencia</span>
+          <span class="hero-tag">Microsoft 365 · Exchange · Teams</span>
+          <span class="hero-tag">Soporte a usuarios · Infra básica</span>
+          <span class="hero-tag">Documentación & buenas prácticas</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.querySelector('#servicios').scrollIntoView({behavior:'smooth'})">
+            Ver servicios que ofrezco
+          </button>
+          <button class="btn-ghost" onclick="document.querySelector('#proyectos').scrollIntoView({behavior:'smooth'})">
+            Ver casos reales
+          </button>
+        </div>
+
+        <p class="hero-note">
+          Perfil orientado a Soporte IT, Especialista Microsoft 365 e IT Specialist, en entornos presenciales o remotos.
+        </p>
       </div>
+
+      <aside class="hero-panel reveal">
+        <div class="hero-panel-inner">
+          <div class="hero-panel-header">
+            <div class="hero-status">Snapshot profesional</div>
+            <div class="hero-chip">IT · M365 · Usuarios</div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>Experiencia</strong>
+              Soporte técnico, administración de Microsoft 365 y atención a usuarios en empresas, sector público
+              y clientes independientes.
+            </div>
+            <div class="stat-card">
+              <strong>En qué destaco</strong>
+              Combino trato cercano con el usuario, visión de procesos y documentación clara para reducir
+              incidencias repetidas.
+            </div>
+            <div class="stat-card">
+              <strong>Hoy estoy trabajando en</strong>
+              Soporte IT y M365 para grupo de empresas con decenas de usuarios internos y clientes externos.
+            </div>
+            <div class="stat-card">
+              <strong>Ubicación</strong>
+              Córdoba, Argentina · Interés en remoto y relocalización (ej. Portugal).
+            </div>
+          </div>
+          <div class="stat-pill-row">
+            <span class="stat-pill">Microsoft 365 Admin Center</span>
+            <span class="stat-pill">Exchange Online · Teams</span>
+            <span class="stat-pill">JIRA · Odoo</span>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <!-- SERVICIOS + CARRITO -->
-    <section class="pg-section pg-section--split" id="servicios">
-      <div class="pg-section__header">
-        <div>
-          <h2>Servicios y tarifas</h2>
-          <p class="pg-section__subtitle">
-            Elegí los servicios que necesitás, armá tu carrito y enviá el detalle por WhatsApp.
-            A partir de 3 equipos iguales por servicio se aplica descuento automático.
-          </p>
-        </div>
+    <!-- SERVICIOS -->
+    <section id="servicios" class="reveal">
+      <div class="section-label">Servicios</div>
+      <h2 class="section-title">¿En qué puedo ayudar a tu empresa o proyecto?</h2>
+      <p class="section-description">
+        Estos son los tipos de servicios que hoy ofrezco, tanto para empresas como para clientes independientes.
+        Pueden adaptarse según la necesidad: soporte puntual, mantenimiento mensual o acompañamiento en un proyecto.
+      </p>
 
-        <div class="pg-filters">
-          <button class="pg-filter js-filter pg-filter--active" data-filter="all">Todos</button>
-          <button class="pg-filter js-filter" data-filter="PC">Sólo PC</button>
-          <button class="pg-filter js-filter" data-filter="Notebook">Sólo Notebook</button>
-        </div>
-      </div>
-
-      <div class="pg-split">
-        <!-- LISTA DE SERVICIOS -->
-        <div class="pg-services">
-          <div id="service-list" class="pg-services__grid">
-            <!-- JS inyecta las tarjetas -->
-          </div>
-        </div>
-
-        <!-- CARRITO / PRESUPUESTO -->
-        <aside class="pg-cart" id="cart-panel">
-          <div class="pg-cart__header">
-            <h3>Carrito / Presupuesto</h3>
-            <span class="pg-cart__badge">Descuento por cantidad activo</span>
-          </div>
-
-          <ul id="cart-items" class="pg-cart__items">
-            <li class="pg-cart__empty">Todavía no agregaste servicios.</li>
-          </ul>
-
-          <div class="pg-cart__summary">
-            <div class="pg-cart__row">
-              <span>Subtotal</span>
-              <strong id="cart-subtotal">$0</strong>
-            </div>
-            <div class="pg-cart__row pg-cart__row--discount">
-              <span>Descuento por cantidad</span>
-              <strong id="cart-discount">-$0</strong>
-            </div>
-            <div class="pg-cart__row pg-cart__row--total">
-              <span>Total estimado</span>
-              <strong id="cart-total">$0</strong>
-            </div>
-            <button id="send-whatsapp" class="pg-btn pg-btn--primary pg-btn--full">
-              Enviar pedido por WhatsApp
-            </button>
-            <p class="pg-cart__note">
-              Los montos son referenciales en ARS y pueden ajustarse según revisión del equipo.
-              Todos los servicios incluyen <strong>3 meses de garantía</strong> sobre la reparación.
+      <div class="services-layout">
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon">💻</div>
+            <h3 class="service-title">Soporte IT para empresas</h3>
+            <p class="service-text">
+              Resolución diaria de incidencias en PCs, notebooks, impresoras, red básica y herramientas de trabajo.
+              Acompaño a los usuarios para que puedan seguir trabajando sin fricciones.
             </p>
+            <div class="service-tags">
+              <span class="service-tag">Soporte nivel 1/2</span>
+              <span class="service-tag">Windows & macOS</span>
+              <span class="service-tag">TeamViewer · AnyDesk</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">☁️</div>
+            <h3 class="service-title">Administración de Microsoft 365</h3>
+            <p class="service-text">
+              Altas y bajas de usuarios, licencias, grupos, configuración de correo en Exchange Online,
+              Teams, OneDrive y ajustes básicos de seguridad.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Exchange Online</span>
+              <span class="service-tag">Teams · OneDrive</span>
+              <span class="service-tag">Buenas prácticas</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">🔁</div>
+            <h3 class="service-title">Migraciones & cambios de plataforma</h3>
+            <p class="service-text">
+              Acompañamiento en migraciones desde Google Workspace u otras plataformas hacia Microsoft 365,
+              cuidando la continuidad del negocio y la experiencia del usuario.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Google → M365</span>
+              <span class="service-tag">Correos & datos</span>
+              <span class="service-tag">Acompañamiento a usuarios</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">🧩</div>
+            <h3 class="service-title">Servicio técnico a particulares & PyMEs</h3>
+            <p class="service-text">
+              Puesta a punto de equipos, limpieza y mantenimiento, instalación de software profesional
+              y asesoría básica de infraestructura para pequeños negocios.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Mantenimiento de equipos</span>
+              <span class="service-tag">Configuración de software</span>
+              <span class="service-tag">Pequeñas empresas</span>
+            </div>
+          </article>
+        </div>
+
+        <aside class="services-side-card">
+          <h3>Cómo trabajo</h3>
+          <p>
+            Me enfoco en entender el contexto del cliente, documentar lo que se hace y dejar procesos más ordenados
+            que antes de entrar. El objetivo no es solo “arreglar el problema”, sino mejorar el día a día.
+          </p>
+          <div class="services-badges">
+            <span class="services-badge">Documentación paso a paso</span>
+            <span class="services-badge">Explicaciones claras</span>
+            <span class="services-badge">Seguimiento y soporte</span>
           </div>
+          <p class="services-note">
+            Si querés que tu empresa tenga menos urgencias y más orden en el área de IT, podemos trabajar juntos.
+          </p>
         </aside>
       </div>
     </section>
 
-    <!-- ACERCA DE MÍ -->
-    <section class="pg-section" id="about">
-      <div class="pg-section__header">
-        <h2>Acerca de mí</h2>
-        <p class="pg-section__subtitle">
-          Un poco más de contexto sobre quién está detrás de PixelGame IT.
-        </p>
-      </div>
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <div class="section-label">Habilidades</div>
+      <h2 class="section-title">Lo que sé hacer y con qué herramientas trabajo</h2>
 
-      <div class="pg-about">
-        <div class="pg-about__main">
-          <h3>Hola, soy Gabriel Iván Ferreyra</h3>
-          <p>
-            Técnico de soporte IT con más de 7 años de experiencia trabajando con usuarios finales,
-            empresas y equipos de tecnología. Me especializo en diagnóstico de hardware,
-            mantenimiento preventivo y correctivo, armado de PCs y soporte sobre entornos Windows.
-          </p>
-          <p>
-            Además de la parte técnica, doy mucha importancia a la comunicación:
-            explico cada paso, dejo registro de lo que se hizo y entrego el equipo
-            con recomendaciones para evitar futuras fallas.
-          </p>
-        </div>
-
-        <div class="pg-about__details">
-          <ul>
-            <li><span class="label">Experiencia:</span> +7 años en soporte IT</li>
-            <li><span class="label">Equipos:</span> PCs de escritorio y notebooks</li>
-            <li><span class="label">Modalidad:</span> remoto, en laboratorio y a domicilio</li>
-            <li><span class="label">Extras:</span> documentación del trabajo y consejos de uso</li>
-          </ul>
-          <div class="pg-about__callout">
-            <p>¿Sos empresa o tenés varios equipos?</p>
-            <p><strong>Podemos armar un plan de mantenimiento periódico</strong> a medida.</p>
+      <div class="skills-grid">
+        <div class="skills-group">
+          <div class="skills-title">
+            Plataformas & suites
+            <span class="skills-chip">Herramientas del día a día</span>
+          </div>
+          <div class="skills-list">
+            <span>Microsoft 365 (usuarios, licencias, grupos)</span>
+            <span>Exchange Online · Teams · OneDrive · SharePoint</span>
+            <span>Google Workspace (administración básica, migraciones)</span>
+            <span>JIRA · Odoo · herramientas de ticketing</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- TRABAJOS REALIZADOS -->
-    <section class="pg-section" id="work">
-      <div class="pg-section__header">
-        <h2>Trabajos realizados</h2>
-        <p class="pg-section__subtitle">
-          Algunas referencias visuales que podés actualizar con tus propias fotos:
-          limpiezas internas, armado de PCs, cambios de pantalla, etc.
-        </p>
-      </div>
+        <div class="skills-group">
+          <div class="skills-title">
+            Soporte & sistemas
+            <span class="skills-chip">Foco en el usuario</span>
+          </div>
+          <div class="skills-list">
+            <span>Soporte nivel 1/2</span>
+            <span>Windows & macOS</span>
+            <span>Hardware de PC y notebooks</span>
+            <span>Impresoras & red básica</span>
+            <span>TeamViewer · AnyDesk</span>
+          </div>
+        </div>
 
-      <div class="pg-work">
-        <!-- reemplazá las imágenes por tus fotos reales -->
-        <div class="pg-work">
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-1.jpg" alt="Limpieza interna de notebook" />
-    </div>
-    <figcaption>
-      Limpieza completa de notebook, cambio de pasta térmica.
-    </figcaption>
-  </figure>
+        <div class="skills-group">
+          <div class="skills-title">
+            Administración & proyectos
+            <span class="skills-chip">Más allá del ticket</span>
+          </div>
+          <div class="skills-list">
+            <span>Migraciones a Microsoft 365</span>
+            <span>Documentación de procesos IT</span>
+            <span>Participación en auditorías ISO 27001 / 9001</span>
+          </div>
+        </div>
 
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-2.jpg" alt="Limpieza interna de notebook gamer" />
-    </div>
-    <figcaption>
-      Limpieza interna de notebook gamer.
-    </figcaption>
-  </figure>
+        <div class="skills-group">
+          <div class="skills-title">
+            Programación & web
+            <span class="skills-chip">Aprendizaje autodidacta</span>
+          </div>
+          <div class="skills-list">
+            <span>HTML · CSS · JavaScript</span>
+            <span>Python (nivel inicial)</span>
+            <span>WordPress</span>
+            <span>Proyectos personales de sitios web</span>
+          </div>
+        </div>
 
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-3.jpg" alt="Desarmado completo de notebook" />
-    </div>
-    <figcaption>
-      Desarmado completo de notebook gamer para su mantenimiento profesional.
-    </figcaption>
-  </figure>
+        <div class="skills-group">
+          <div class="skills-title">
+            Idiomas
+            <span class="skills-chip">Comunicación</span>
+          </div>
+          <div class="skills-list">
+            <span>Español · Nativo</span>
+            <span>Inglés · Nivel básico (en mejora)</span>
+            <span>Portugués · Nivel básico</span>
+            <span>Italiano · Nivel básico</span>
+          </div>
+        </div>
 
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-4.jpg" alt="Reensable de notebook" />
-    </div>
-    <figcaption>
-      Rearmado de notebook luego de su mantenimiento completo.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-5.jpg" alt="Limpieza de Pc de escritorio" />
-    </div>
-    <figcaption>
-      Limpieza completa de Pc de escritorio.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-6.jpg" alt="Gabinete de pc completamente desarmado para la limpieza profunda" />
-    </div>
-    <figcaption>
-      Desarmado completo del gabinete de la PC gamer para su limpieza profunda.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-7.jpg" alt="Componentes de la Pc de escritorio" />
-    </div>
-    <figcaption>
-      Componentes de la PC de escritorio ordenados y limpios antes de su ensamble nuevamente.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-8.jpg" alt="Notebook para mantenimiento" />
-    </div>
-    <figcaption>
-      Limpieza de notebook.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-9.jpg" alt="Notebook lista para la limpieza" />
-    </div>
-    <figcaption>
-      Desarmado de notebook para limpieza.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-10.jpg" alt="" />
-    </div>
-    <figcaption>
-      Mantenimiento preventivo de PCs de oficina con limpieza y pruebas de disco.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-11.jpg" alt="Revisión de fuente y hardware" />
-    </div>
-    <figcaption>
-      Diagnóstico de fuente de alimentación y pruebas de componentes internos.
-    </figcaption>
-  </figure>
-
-  <figure class="pg-work__item">
-    <div class="pg-work__thumb">
-      <img src="img/trabajo-13.jpg" alt="Cambio de pantalla de notebook" />
-    </div>
-    <figcaption>
-      Reemplazo de pantalla rota por panel nuevo, calibración básica de color.
-    </figcaption>
-  </figure>
-</div>
-
-      </div>
-    </section>
-  </main>
-
-  <footer class="pg-footer">
-    <p>PixelGame IT · Servicio técnico especializado en PC &amp; Notebook · Precios actualizados agosto 2025</p>
-  </footer>
-
-  <!-- JS -->
-  <script src="js/app.js"></script>
-</body>
-</html>
+        <div class="skills-group">
+          <div class="skills-title">
+            Soft skills
+            <span class="skills-chip">Cómo trato a las personas</span>
+          </div>
+          <div class="skills-list">
+            <span>Comunicación con usuarios no técnicos</span>
+            <span>Empatía y orientación al servicio</span>
+            <span>Capacidad de análisis y resolución de problemas</span>
+            <span>Trabajo en equipo</span>
+          </div>
