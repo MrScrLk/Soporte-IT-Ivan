@@ -1,15 +1,8 @@
-// Cambiá este número por tu WhatsApp (formato internacional sin +)
 const WHATSAPP_NUMBER = "5491112345678";
 
-// Configuración de descuento por cantidad
 const DISCOUNT_THRESHOLD = 3;   // a partir de cuántas unidades del mismo servicio
 const DISCOUNT_RATE = 0.1;      // 10 % de descuento
 
-/**
- * Catálogo de servicios (solo PC y Notebook).
- * Precios freelance actualizados a agosto 2025.
- * Agregué un campo "category" para agruparlos en el menú lateral.
- */
 const services = [
   // MANTENIMIENTO / SISTEMA
   {
@@ -17,7 +10,7 @@ const services = [
     name: "Diagnóstico / revisión",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 9081,
+    price: 10171,
     desc: "Chequeo general del equipo, estado de disco, rendimiento y temperatura."
   },
   {
@@ -25,7 +18,7 @@ const services = [
     name: "Formateo e instalación de Sistema Operativo (sin BackUp)",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 41514,
+    price: 46495,
     desc: "Formateo limpio, instalación de Windows y drivers básicos."
   },
   {
@@ -33,7 +26,7 @@ const services = [
     name: "Limpieza + formateo + programas + BackUp + cambio a SSD",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 51892,
+    price: 58119,
     desc: "Limpieza interna, reinstalación, programas básicos y migración a SSD."
   },
   {
@@ -41,7 +34,7 @@ const services = [
     name: "BackUp de datos cada 100 GB extras",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 10378,
+    price: 11624,
     desc: "Copia de seguridad adicional por cada 100 GB de datos."
   },
   {
@@ -49,7 +42,7 @@ const services = [
     name: "Inicialización de equipo nuevo",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 38919,
+    price: 43589,
     desc: "Configuración inicial de equipo nuevo con programas básicos."
   },
   {
@@ -57,7 +50,7 @@ const services = [
     name: "Instalación de programa OpenSource x1",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 10378,
+    price: 11624,
     desc: "Instalación y ajuste de un software libre (LibreOffice, GIMP, etc.)."
   },
   {
@@ -65,7 +58,7 @@ const services = [
     name: "Instalación de programa comercial x1 (provisto)",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 11676,
+    price: 13077,
     desc: "Instalación de licencias provistas por el cliente."
   },
   {
@@ -73,7 +66,7 @@ const services = [
     name: "Instalación y configuración de drivers",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 16865,
+    price: 18889,
     desc: "Actualización de controladores para mejorar compatibilidad y rendimiento."
   },
   {
@@ -81,7 +74,7 @@ const services = [
     name: "Eliminación de malware",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 23352,
+    price: 26154,
     desc: "Limpieza de virus, spyware y software no deseado."
   },
 
@@ -91,7 +84,7 @@ const services = [
     name: "Conexión remota x 1 hs - problemas generales",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 10378,
+    price: 11624,
     desc: "Soporte remoto para resolver problemas comunes sin mover el equipo."
   },
   {
@@ -99,7 +92,7 @@ const services = [
     name: "Visita a domicilio x 1 hs",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 15568,
+    price: 17436,
     desc: "Soporte presencial en tu domicilio u oficina (dentro de zona de cobertura)."
   },
   {
@@ -107,7 +100,7 @@ const services = [
     name: "Visita a domicilio x 1 hs (emergencia fuera de horario)",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 45406,
+    price: 50854,
     desc: "Atención urgente fuera de horario habitual."
   },
 
@@ -117,7 +110,7 @@ const services = [
     name: "Clonado de disco sin errores SMART",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 36325,
+    price: 40684,
     desc: "Clonado de disco sano a otro disco o SSD."
   },
   {
@@ -125,7 +118,7 @@ const services = [
     name: "Clonado de disco con errores SMART",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 51892,
+    price: 58119,
     desc: "Intento de recuperación y clonado de discos con fallas SMART."
   },
   {
@@ -133,7 +126,7 @@ const services = [
     name: "Reparación de inicio de Windows",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 34275,
+    price: 38388,
     desc: "Restablecimiento del arranque de Windows y de la sesión de usuario."
   },
 
@@ -143,7 +136,7 @@ const services = [
     name: "Armado de PC básica desde 0",
     tags: ["PC"],
     category: "hardware",
-    price: 51892,
+    price: 58119,
     desc: "Ensamblado, cableado y testeo de PC de uso general."
   },
   {
@@ -151,7 +144,7 @@ const services = [
     name: "Armado de PC gamer desde 0",
     tags: ["PC"],
     category: "hardware",
-    price: 77838,
+    price: 87179,
     desc: "Armado profesional de PC gamer con buen airflow y cable management."
   },
   {
@@ -159,7 +152,7 @@ const services = [
     name: "Cambio de componente de hardware x1 (PC)",
     tags: ["PC"],
     category: "hardware",
-    price: 20757,
+    price: 23248,
     desc: "Reemplazo de un componente interno (fuente, placa de video, etc.)."
   },
   {
@@ -167,7 +160,7 @@ const services = [
     name: "Limpieza + cambio de pasta térmica (PC)",
     tags: ["PC"],
     category: "hardware",
-    price: 32433,
+    price: 36325,
     desc: "Limpieza interna y renovación de pasta térmica del procesador."
   },
   {
@@ -175,7 +168,7 @@ const services = [
     name: "Limpieza + cambio de pasta térmica (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 36325,
+    price: 40684,
     desc: "Desarme de notebook, limpieza de cooler y cambio de pasta térmica."
   },
   {
@@ -183,7 +176,7 @@ const services = [
     name: "Cambio de flex (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 23352,
+    price: 26154,
     desc: "Reemplazo del flex de video u otros flex internos dañados."
   },
   {
@@ -191,7 +184,7 @@ const services = [
     name: "Cambio de pantalla (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 25946,
+    price: 29060,
     desc: "Reemplazo de pantalla rota o con fallas."
   },
   {
@@ -199,7 +192,7 @@ const services = [
     name: "Cambio de teclado (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 20757,
+    price: 23248,
     desc: "Cambio de teclado completo en notebooks."
   },
   {
@@ -207,36 +200,17 @@ const services = [
     name: "Despiece + cambio de componentes internos (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 46703,
+    price: 52307,
     desc: "Desarme completo para cambio de componentes internos."
-  },
-  {
-    id: "reflow",
-    name: "Reflow de placa madre (PC/Notebook)",
-    tags: ["PC", "Notebook"],
-    category: "hardware",
-    price: 70000,
-    desc: "Trabajo avanzado sobre placa madre (casos específicos)."
   },
   {
     id: "cambio-pin",
     name: "Cambio de pin de carga (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 38919,
+    price: 43589,
     desc: "Reparación del conector de carga en notebooks."
   },
-
-  // REDES
-  {
-    id: "config-router",
-    name: "Configuración de router / access point in situ",
-    tags: ["PC", "Notebook"],
-    category: "redes",
-    price: 25946,
-    desc: "Configuración de red WiFi y cableada para tus equipos."
-  }
-];
 
 // --- DOM ---
 
@@ -394,7 +368,7 @@ function renderCart() {
 
 function buildWhatsappMessage() {
   if (cart.length === 0) {
-    return "Hola, quiero consultar por un servicio técnico para mi PC/notebook. Todos los trabajos incluyen 3 meses de garantía.";
+    return "Hola, quiero consultar por un servicio técnico para mi PC/notebook.";
   }
 
   const subtotal = cartSubtotal();
