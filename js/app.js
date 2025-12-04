@@ -1,5 +1,9 @@
 const WHATSAPP_NUMBER = "5491112345678";
 
+console.log("PixelGame IT JS cargado");
+console.log("Servicios:", services ? services.length : "no definido");
+
+
 const DISCOUNT_THRESHOLD = 3;   // a partir de cuántas unidades del mismo servicio
 const DISCOUNT_RATE = 0.1;      // 10 % de descuento
 
