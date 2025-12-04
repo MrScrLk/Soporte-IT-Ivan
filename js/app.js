@@ -1,190 +1,248 @@
+// Cambiá este número por tu WhatsApp (formato internacional sin +)
 const WHATSAPP_NUMBER = "5491112345678";
 
+// Configuración de descuento por cantidad
 const DISCOUNT_THRESHOLD = 3;   // a partir de cuántas unidades del mismo servicio
-const DISCOUNT_RATE = 0.1;      // 10% de descuento
+const DISCOUNT_RATE = 0.1;      // 10 % de descuento
 
+/**
+ * Catálogo de servicios (solo PC y Notebook).
+ * Precios freelance actualizados a agosto 2025.
+ * Agregué un campo "category" para agruparlos en el menú lateral.
+ */
 const services = [
+  // MANTENIMIENTO / SISTEMA
   {
     id: "diagnostico",
     name: "Diagnóstico / revisión",
     tags: ["PC", "Notebook"],
-    price: 10171,
+    category: "mantenimiento",
+    price: 9081,
     desc: "Chequeo general del equipo, estado de disco, rendimiento y temperatura."
   },
   {
     id: "formateo-so",
     name: "Formateo e instalación de Sistema Operativo (sin BackUp)",
     tags: ["PC", "Notebook"],
-    price: 46495,
+    category: "mantenimiento",
+    price: 41514,
     desc: "Formateo limpio, instalación de Windows y drivers básicos."
   },
   {
     id: "full-limpieza-ssd",
     name: "Limpieza + formateo + programas + BackUp + cambio a SSD",
     tags: ["PC", "Notebook"],
-    price: 58119,
+    category: "mantenimiento",
+    price: 51892,
     desc: "Limpieza interna, reinstalación, programas básicos y migración a SSD."
   },
   {
     id: "backup-extra",
     name: "BackUp de datos cada 100 GB extras",
     tags: ["PC", "Notebook"],
-    price: 11624,
+    category: "mantenimiento",
+    price: 10378,
     desc: "Copia de seguridad adicional por cada 100 GB de datos."
   },
   {
     id: "init-nuevo",
     name: "Inicialización de equipo nuevo",
     tags: ["PC", "Notebook"],
-    price: 43589,
+    category: "mantenimiento",
+    price: 38919,
     desc: "Configuración inicial de equipo nuevo con programas básicos."
   },
   {
     id: "inst-oss",
     name: "Instalación de programa OpenSource x1",
     tags: ["PC", "Notebook"],
-    price: 11624,
+    category: "mantenimiento",
+    price: 10378,
     desc: "Instalación y ajuste de un software libre (LibreOffice, GIMP, etc.)."
   },
   {
     id: "inst-comercial",
     name: "Instalación de programa comercial x1 (provisto)",
     tags: ["PC", "Notebook"],
-    price: 13077,
+    category: "mantenimiento",
+    price: 11676,
     desc: "Instalación de licencias provistas por el cliente."
   },
   {
     id: "drivers",
     name: "Instalación y configuración de drivers",
     tags: ["PC", "Notebook"],
-    price: 18889,
+    category: "mantenimiento",
+    price: 16865,
     desc: "Actualización de controladores para mejorar compatibilidad y rendimiento."
   },
   {
     id: "malware",
     name: "Eliminación de malware",
     tags: ["PC", "Notebook"],
-    price: 26154,
+    category: "mantenimiento",
+    price: 23352,
     desc: "Limpieza de virus, spyware y software no deseado."
   },
+
+  // VISITAS / REMOTO
   {
     id: "remoto",
     name: "Conexión remota x 1 hs - problemas generales",
     tags: ["PC", "Notebook"],
-    price: 11624,
+    category: "visita",
+    price: 10378,
     desc: "Soporte remoto para resolver problemas comunes sin mover el equipo."
   },
   {
     id: "visita",
     name: "Visita a domicilio x 1 hs",
     tags: ["PC", "Notebook"],
-    price: 17436,
+    category: "visita",
+    price: 15568,
     desc: "Soporte presencial en tu domicilio u oficina (dentro de zona de cobertura)."
   },
   {
     id: "visita-urg",
     name: "Visita a domicilio x 1 hs (emergencia fuera de horario)",
     tags: ["PC", "Notebook"],
-    price: 50854,
+    category: "visita",
+    price: 45406,
     desc: "Atención urgente fuera de horario habitual."
   },
+
+  // MANTENIMIENTO AVANZADO / DISCO
   {
     id: "clonado-ok",
     name: "Clonado de disco sin errores SMART",
     tags: ["PC", "Notebook"],
-    price: 40684,
+    category: "mantenimiento",
+    price: 36325,
     desc: "Clonado de disco sano a otro disco o SSD."
   },
   {
     id: "clonado-bad",
     name: "Clonado de disco con errores SMART",
     tags: ["PC", "Notebook"],
-    price: 58119,
+    category: "mantenimiento",
+    price: 51892,
     desc: "Intento de recuperación y clonado de discos con fallas SMART."
   },
   {
     id: "reparacion-inicio",
     name: "Reparación de inicio de Windows",
     tags: ["PC", "Notebook"],
-    price: 38388,
+    category: "mantenimiento",
+    price: 34275,
     desc: "Restablecimiento del arranque de Windows y de la sesión de usuario."
   },
+
+  // HARDWARE & MEJORAS
   {
     id: "armado-pc-basica",
     name: "Armado de PC básica desde 0",
     tags: ["PC"],
-    price: 58119,
+    category: "hardware",
+    price: 51892,
     desc: "Ensamblado, cableado y testeo de PC de uso general."
   },
   {
     id: "armado-pc-gamer",
     name: "Armado de PC gamer desde 0",
     tags: ["PC"],
-    price: 87179,
+    category: "hardware",
+    price: 77838,
     desc: "Armado profesional de PC gamer con buen airflow y cable management."
   },
   {
     id: "cambio-hw-pc",
     name: "Cambio de componente de hardware x1 (PC)",
     tags: ["PC"],
-    price: 23248,
+    category: "hardware",
+    price: 20757,
     desc: "Reemplazo de un componente interno (fuente, placa de video, etc.)."
   },
   {
     id: "limpieza-pc-pasta",
     name: "Limpieza + cambio de pasta térmica (PC)",
     tags: ["PC"],
-    price: 36325,
+    category: "hardware",
+    price: 32433,
     desc: "Limpieza interna y renovación de pasta térmica del procesador."
   },
   {
     id: "limpieza-notebook-pasta",
     name: "Limpieza + cambio de pasta térmica (Notebook)",
     tags: ["Notebook"],
-    price: 40684,
+    category: "hardware",
+    price: 36325,
     desc: "Desarme de notebook, limpieza de cooler y cambio de pasta térmica."
   },
   {
     id: "cambio-flex",
     name: "Cambio de flex (Notebook)",
     tags: ["Notebook"],
-    price: 26154,
+    category: "hardware",
+    price: 23352,
     desc: "Reemplazo del flex de video u otros flex internos dañados."
   },
   {
     id: "cambio-pantalla",
     name: "Cambio de pantalla (Notebook)",
     tags: ["Notebook"],
-    price: 29060,
+    category: "hardware",
+    price: 25946,
     desc: "Reemplazo de pantalla rota o con fallas."
   },
   {
     id: "cambio-teclado",
     name: "Cambio de teclado (Notebook)",
     tags: ["Notebook"],
-    price: 23248,
+    category: "hardware",
+    price: 20757,
     desc: "Cambio de teclado completo en notebooks."
   },
   {
     id: "despiece-notebook",
     name: "Despiece + cambio de componentes internos (Notebook)",
     tags: ["Notebook"],
-    price: 52307,
+    category: "hardware",
+    price: 46703,
     desc: "Desarme completo para cambio de componentes internos."
+  },
+  {
+    id: "reflow",
+    name: "Reflow de placa madre (PC/Notebook)",
+    tags: ["PC", "Notebook"],
+    category: "hardware",
+    price: 70000,
+    desc: "Trabajo avanzado sobre placa madre (casos específicos)."
   },
   {
     id: "cambio-pin",
     name: "Cambio de pin de carga (Notebook)",
     tags: ["Notebook"],
-    price: 43589,
+    category: "hardware",
+    price: 38919,
     desc: "Reparación del conector de carga en notebooks."
+  },
+
+  // REDES
+  {
+    id: "config-router",
+    name: "Configuración de router / access point in situ",
+    tags: ["PC", "Notebook"],
+    category: "redes",
+    price: 25946,
+    desc: "Configuración de red WiFi y cableada para tus equipos."
   }
 ];
 
 // --- DOM ---
 
-const serviceListEl = document.getElementById("service-list");
-const filterButtons = document.querySelectorAll(".js-filter");
+const servicesGrid = document.getElementById("services-grid");
+const categoryButtons = document.querySelectorAll(".pg-category");
+
 const cartItemsEl = document.getElementById("cart-items");
 const cartSubtotalEl = document.getElementById("cart-subtotal");
 const cartDiscountEl = document.getElementById("cart-discount");
@@ -194,6 +252,8 @@ const whatsappHeroBtn = document.getElementById("whatsapp-hero");
 
 let cart = [];
 
+// ---- UTILIDADES ----
+
 function formatCurrency(value) {
   try {
     return new Intl.NumberFormat("es-AR", {
@@ -201,14 +261,14 @@ function formatCurrency(value) {
       currency: "ARS",
       maximumFractionDigits: 0
     }).format(value);
-  } catch (e) {
+  } catch {
     return `$${value.toLocaleString("es-AR")}`;
   }
 }
 
-// --- RENDER SERVICIOS ---
+// ---- RENDER SERVICIOS ----
 
-function createServiceCard(service) {
+function createServiceRow(service) {
   const tagsHtml = service.tags
     .map(tag => {
       const cls = tag === "PC" ? "pg-tag--pc" : "pg-tag--nb";
@@ -217,34 +277,38 @@ function createServiceCard(service) {
     .join("");
 
   const title =
-    service.name.length > 64 ? service.name.slice(0, 61) + "..." : service.name;
+    service.name.length > 70 ? service.name.slice(0, 67) + "..." : service.name;
 
   return `
-    <article class="pg-service-card" data-tags="${service.tags.join(",")}">
-      <h3 class="pg-service__title">${title}</h3>
-      <div class="pg-service__tags">${tagsHtml}</div>
-      <p class="pg-service__desc">${service.desc}</p>
-      <div class="pg-service__footer">
-        <div class="pg-service__price">
+    <article class="pg-service-row">
+      <div class="pg-service-row__main">
+        <h3>${title}</h3>
+        <p class="pg-service-row__desc">${service.desc}</p>
+        <div class="pg-service-row__tags">
+          ${tagsHtml}
+        </div>
+      </div>
+      <div class="pg-service-row__side">
+        <div class="pg-service-row__price">
           ${formatCurrency(service.price)}
           <span>precio freelance</span>
         </div>
-        <button class="pg-service__btn" data-add="${service.id}">
-          Agregar al carrito
+        <button class="pg-service-row__btn" data-add="${service.id}">
+          Agregar
         </button>
       </div>
     </article>
   `;
 }
 
-function renderServices(filter = "all") {
-  const selected = services.filter(service =>
-    filter === "all" ? true : service.tags.includes(filter)
+function renderServices(category = "all") {
+  const filtered = services.filter(s =>
+    category === "all" ? true : s.category === category
   );
-  serviceListEl.innerHTML = selected.map(createServiceCard).join("");
+  servicesGrid.innerHTML = filtered.map(createServiceRow).join("");
 }
 
-// --- CARRITO ---
+// ---- CARRITO ----
 
 function addToCart(id) {
   const svc = services.find(s => s.id === id);
@@ -321,11 +385,12 @@ function renderCart() {
   const total = cartTotal();
 
   cartSubtotalEl.textContent = formatCurrency(subtotal);
-  cartDiscountEl.textContent = discount > 0 ? "-" + formatCurrency(discount) : "-$0";
+  cartDiscountEl.textContent =
+    discount > 0 ? "-" + formatCurrency(discount) : "-$0";
   cartTotalEl.textContent = formatCurrency(total);
 }
 
-// --- WHATSAPP ---
+// ---- WHATSAPP ----
 
 function buildWhatsappMessage() {
   if (cart.length === 0) {
@@ -363,32 +428,36 @@ function openWhatsapp() {
   window.open(url, "_blank");
 }
 
-// --- EVENTOS ---
+// ---- EVENTOS ----
 
-filterButtons.forEach(btn => {
+// Categorías
+categoryButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("pg-filter--active"));
-    btn.classList.add("pg-filter--active");
-    renderServices(btn.dataset.filter);
+    categoryButtons.forEach(b => b.classList.remove("pg-category--active"));
+    btn.classList.add("pg-category--active");
+    const category = btn.dataset.category;
+    renderServices(category);
   });
 });
 
-serviceListEl.addEventListener("click", e => {
+// Click en servicios (delegado)
+servicesGrid.addEventListener("click", e => {
   const btn = e.target.closest("[data-add]");
   if (!btn) return;
   addToCart(btn.dataset.add);
 });
 
+// Click en carrito (quitar)
 cartItemsEl.addEventListener("click", e => {
   const btn = e.target.closest("[data-remove]");
   if (!btn) return;
   removeFromCart(btn.dataset.remove);
 });
 
+// Botones WhatsApp
 sendWhatsappBtn.addEventListener("click", openWhatsapp);
 whatsappHeroBtn.addEventListener("click", openWhatsapp);
 
-// --- INIT ---
-
+// ---- INIT ----
 renderServices("all");
 renderCart();
