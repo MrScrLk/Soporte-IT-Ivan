@@ -8,189 +8,175 @@ const services = [
     id: "diagnostico",
     name: "Diagnóstico / revisión",
     tags: ["PC", "Notebook"],
-    price: 9081,
+    price: 10171,
     desc: "Chequeo general del equipo, estado de disco, rendimiento y temperatura."
   },
   {
     id: "formateo-so",
     name: "Formateo e instalación de Sistema Operativo (sin BackUp)",
     tags: ["PC", "Notebook"],
-    price: 41514,
+    price: 46495,
     desc: "Formateo limpio, instalación de Windows y drivers básicos."
   },
   {
     id: "full-limpieza-ssd",
     name: "Limpieza + formateo + programas + BackUp + cambio a SSD",
     tags: ["PC", "Notebook"],
-    price: 51892,
+    price: 58119,
     desc: "Limpieza interna, reinstalación, programas básicos y migración a SSD."
   },
   {
     id: "backup-extra",
     name: "BackUp de datos cada 100 GB extras",
     tags: ["PC", "Notebook"],
-    price: 10378,
+    price: 11624,
     desc: "Copia de seguridad adicional por cada 100 GB de datos."
   },
   {
     id: "init-nuevo",
     name: "Inicialización de equipo nuevo",
     tags: ["PC", "Notebook"],
-    price: 38919,
+    price: 43589,
     desc: "Configuración inicial de equipo nuevo con programas básicos."
   },
   {
     id: "inst-oss",
     name: "Instalación de programa OpenSource x1",
     tags: ["PC", "Notebook"],
-    price: 10378,
+    price: 11624,
     desc: "Instalación y ajuste de un software libre (LibreOffice, GIMP, etc.)."
   },
   {
     id: "inst-comercial",
     name: "Instalación de programa comercial x1 (provisto)",
     tags: ["PC", "Notebook"],
-    price: 11676,
+    price: 13077,
     desc: "Instalación de licencias provistas por el cliente."
   },
   {
     id: "drivers",
     name: "Instalación y configuración de drivers",
     tags: ["PC", "Notebook"],
-    price: 16865,
+    price: 18889,
     desc: "Actualización de controladores para mejorar compatibilidad y rendimiento."
   },
   {
     id: "malware",
     name: "Eliminación de malware",
     tags: ["PC", "Notebook"],
-    price: 23352,
+    price: 26154,
     desc: "Limpieza de virus, spyware y software no deseado."
   },
   {
     id: "remoto",
     name: "Conexión remota x 1 hs - problemas generales",
     tags: ["PC", "Notebook"],
-    price: 10378,
+    price: 11624,
     desc: "Soporte remoto para resolver problemas comunes sin mover el equipo."
   },
   {
     id: "visita",
     name: "Visita a domicilio x 1 hs",
     tags: ["PC", "Notebook"],
-    price: 15568,
+    price: 17436,
     desc: "Soporte presencial en tu domicilio u oficina (dentro de zona de cobertura)."
   },
   {
     id: "visita-urg",
     name: "Visita a domicilio x 1 hs (emergencia fuera de horario)",
     tags: ["PC", "Notebook"],
-    price: 45406,
+    price: 50854,
     desc: "Atención urgente fuera de horario habitual."
   },
   {
     id: "clonado-ok",
     name: "Clonado de disco sin errores SMART",
     tags: ["PC", "Notebook"],
-    price: 36325,
+    price: 40684,
     desc: "Clonado de disco sano a otro disco o SSD."
   },
   {
     id: "clonado-bad",
     name: "Clonado de disco con errores SMART",
     tags: ["PC", "Notebook"],
-    price: 51892,
+    price: 58119,
     desc: "Intento de recuperación y clonado de discos con fallas SMART."
   },
   {
     id: "reparacion-inicio",
     name: "Reparación de inicio de Windows",
     tags: ["PC", "Notebook"],
-    price: 34275,
+    price: 38388,
     desc: "Restablecimiento del arranque de Windows y de la sesión de usuario."
   },
   {
     id: "armado-pc-basica",
     name: "Armado de PC básica desde 0",
     tags: ["PC"],
-    price: 51892,
+    price: 58119,
     desc: "Ensamblado, cableado y testeo de PC de uso general."
   },
   {
     id: "armado-pc-gamer",
     name: "Armado de PC gamer desde 0",
     tags: ["PC"],
-    price: 77838,
+    price: 87179,
     desc: "Armado profesional de PC gamer con buen airflow y cable management."
   },
   {
     id: "cambio-hw-pc",
     name: "Cambio de componente de hardware x1 (PC)",
     tags: ["PC"],
-    price: 20757,
+    price: 23248,
     desc: "Reemplazo de un componente interno (fuente, placa de video, etc.)."
   },
   {
     id: "limpieza-pc-pasta",
     name: "Limpieza + cambio de pasta térmica (PC)",
     tags: ["PC"],
-    price: 32433,
+    price: 36325,
     desc: "Limpieza interna y renovación de pasta térmica del procesador."
   },
   {
     id: "limpieza-notebook-pasta",
     name: "Limpieza + cambio de pasta térmica (Notebook)",
     tags: ["Notebook"],
-    price: 36325,
+    price: 40684,
     desc: "Desarme de notebook, limpieza de cooler y cambio de pasta térmica."
   },
   {
     id: "cambio-flex",
     name: "Cambio de flex (Notebook)",
     tags: ["Notebook"],
-    price: 23352,
+    price: 26154,
     desc: "Reemplazo del flex de video u otros flex internos dañados."
   },
   {
     id: "cambio-pantalla",
     name: "Cambio de pantalla (Notebook)",
     tags: ["Notebook"],
-    price: 25946,
+    price: 29060,
     desc: "Reemplazo de pantalla rota o con fallas."
   },
   {
     id: "cambio-teclado",
     name: "Cambio de teclado (Notebook)",
     tags: ["Notebook"],
-    price: 20757,
+    price: 23248,
     desc: "Cambio de teclado completo en notebooks."
   },
   {
     id: "despiece-notebook",
     name: "Despiece + cambio de componentes internos (Notebook)",
     tags: ["Notebook"],
-    price: 46703,
+    price: 52307,
     desc: "Desarme completo para cambio de componentes internos."
-  },
-  {
-    id: "config-router",
-    name: "Configuración de router / access point in situ",
-    tags: ["PC", "Notebook"],
-    price: 25946,
-    desc: "Configuración de red WiFi y cableada para tus equipos."
-  },
-  {
-    id: "reflow",
-    name: "Reflow de placa madre (PC/Notebook)",
-    tags: ["PC", "Notebook"],
-    price: 70000,
-    desc: "Trabajo avanzado sobre placa madre (casos específicos)."
   },
   {
     id: "cambio-pin",
     name: "Cambio de pin de carga (Notebook)",
     tags: ["Notebook"],
-    price: 38919,
+    price: 43589,
     desc: "Reparación del conector de carga en notebooks."
   }
 ];
