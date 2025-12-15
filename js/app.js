@@ -1,12 +1,9 @@
-const WHATSAPP_NUMBER = "5491112345678";
+const WHATSAPP_NUMBER = "5491112345678"; // <-- Poner mi número
 
-console.log("PixelGame IT JS cargado");
-console.log("Servicios:", services ? services.length : "no definido");
+const DISCOUNT_THRESHOLD = 3; // desde cuántas unidades del mismo servicio
+const DISCOUNT_RATE = 0.1;    // 10 %
 
-
-const DISCOUNT_THRESHOLD = 3;   // a partir de cuántas unidades del mismo servicio
-const DISCOUNT_RATE = 0.1;      // 10 % de descuento
-
+// ------------------ SERVICIOS (Córdoba Capital - Diciembre 2025 - Freelance) ------------------
 const services = [
   // MANTENIMIENTO / SISTEMA
   {
@@ -14,7 +11,9 @@ const services = [
     name: "Diagnóstico / revisión",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 9081,
+    price: 10171,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Chequeo general del equipo, estado de disco, rendimiento y temperatura."
   },
   {
@@ -22,39 +21,49 @@ const services = [
     name: "Formateo e instalación de Sistema Operativo (sin BackUp)",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 41514,
+    price: 46495,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Formateo limpio, instalación de Windows y drivers básicos."
   },
   {
     id: "full-limpieza-ssd",
-    name: "Limpieza + formateo + programas + BackUp + cambio a SSD",
+    name: "Limpieza + formateo + programas + BackUp hasta 100 GB + cambio a SSD",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 51892,
-    desc: "Limpieza interna, reinstalación, programas básicos y migración a SSD."
+    price: 58119,
+    unitLabel: "por equipo",
+    discountEligible: true,
+    desc: "Limpieza interna, reinstalación, programas básicos, backup hasta 100 GB y migración a SSD."
   },
   {
     id: "backup-extra",
     name: "BackUp de datos cada 100 GB extras",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 10378,
-    desc: "Copia de seguridad adicional por cada 100 GB de datos."
+    price: 11624,
+    unitLabel: "cada 100 GB",
+    discountEligible: false,
+    desc: "Copia de seguridad adicional por cada 100 GB."
   },
   {
     id: "init-nuevo",
-    name: "Inicialización de equipo nuevo",
+    name: "Inicialización de equipo nuevo (configuración + programas básicos)",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 38919,
-    desc: "Configuración inicial de equipo nuevo con programas básicos."
+    price: 43589,
+    unitLabel: "por equipo",
+    discountEligible: true,
+    desc: "Configuración inicial, cuentas, actualizaciones y programas básicos."
   },
   {
     id: "inst-oss",
     name: "Instalación de programa OpenSource x1",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 10378,
+    price: 11624,
+    unitLabel: "por instalación",
+    discountEligible: true,
     desc: "Instalación y ajuste de un software libre (LibreOffice, GIMP, etc.)."
   },
   {
@@ -62,15 +71,19 @@ const services = [
     name: "Instalación de programa comercial x1 (provisto)",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 11676,
-    desc: "Instalación de licencias provistas por el cliente."
+    price: 13077,
+    unitLabel: "por instalación",
+    discountEligible: true,
+    desc: "Instalación de software con licencia provista por el cliente."
   },
   {
     id: "drivers",
     name: "Instalación y configuración de drivers",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 16865,
+    price: 18889,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Actualización de controladores para mejorar compatibilidad y rendimiento."
   },
   {
@@ -78,7 +91,9 @@ const services = [
     name: "Eliminación de malware",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 23352,
+    price: 26154,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Limpieza de virus, spyware y software no deseado."
   },
 
@@ -88,7 +103,9 @@ const services = [
     name: "Conexión remota x 1 hs - problemas generales",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 10378,
+    price: 11624,
+    unitLabel: "por hora",
+    discountEligible: true,
     desc: "Soporte remoto para resolver problemas comunes sin mover el equipo."
   },
   {
@@ -96,15 +113,19 @@ const services = [
     name: "Visita a domicilio x 1 hs",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 15568,
-    desc: "Soporte presencial en tu domicilio u oficina (dentro de zona de cobertura)."
+    price: 17436,
+    unitLabel: "por hora",
+    discountEligible: true,
+    desc: "Soporte presencial en tu domicilio u oficina (Córdoba Capital)."
   },
   {
     id: "visita-urg",
     name: "Visita a domicilio x 1 hs (emergencia fuera de horario)",
     tags: ["PC", "Notebook"],
     category: "visita",
-    price: 45406,
+    price: 50854,
+    unitLabel: "por hora",
+    discountEligible: false,
     desc: "Atención urgente fuera de horario habitual."
   },
 
@@ -114,7 +135,9 @@ const services = [
     name: "Clonado de disco sin errores SMART",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 36325,
+    price: 40684,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Clonado de disco sano a otro disco o SSD."
   },
   {
@@ -122,16 +145,20 @@ const services = [
     name: "Clonado de disco con errores SMART",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 51892,
-    desc: "Intento de recuperación y clonado de discos con fallas SMART."
+    price: 58119,
+    unitLabel: "por equipo",
+    discountEligible: false,
+    desc: "Recuperación/lectura avanzada y clonado de discos con fallas SMART."
   },
   {
     id: "reparacion-inicio",
-    name: "Reparación de inicio de Windows",
+    name: "Reparación de inicio de Windows / restablecimiento de sesión",
     tags: ["PC", "Notebook"],
     category: "mantenimiento",
-    price: 34275,
-    desc: "Restablecimiento del arranque de Windows y de la sesión de usuario."
+    price: 38388,
+    unitLabel: "por equipo",
+    discountEligible: true,
+    desc: "Restablecimiento del arranque y recuperación de la sesión de usuario."
   },
 
   // HARDWARE & MEJORAS
@@ -140,7 +167,9 @@ const services = [
     name: "Armado de PC básica desde 0",
     tags: ["PC"],
     category: "hardware",
-    price: 51892,
+    price: 58119,
+    unitLabel: "por equipo",
+    discountEligible: false,
     desc: "Ensamblado, cableado y testeo de PC de uso general."
   },
   {
@@ -148,23 +177,29 @@ const services = [
     name: "Armado de PC gamer desde 0",
     tags: ["PC"],
     category: "hardware",
-    price: 77838,
-    desc: "Armado profesional de PC gamer con buen airflow y cable management."
+    price: 87179,
+    unitLabel: "por equipo",
+    discountEligible: false,
+    desc: "Armado profesional con buen airflow y cable management."
   },
   {
     id: "cambio-hw-pc",
     name: "Cambio de componente de hardware x1 (PC)",
     tags: ["PC"],
     category: "hardware",
-    price: 20757,
-    desc: "Reemplazo de un componente interno (fuente, placa de video, etc.)."
+    price: 23248,
+    unitLabel: "por componente",
+    discountEligible: true,
+    desc: "Reemplazo de un componente interno (fuente, GPU, RAM, etc.)."
   },
   {
     id: "limpieza-pc-pasta",
     name: "Limpieza + cambio de pasta térmica (PC)",
     tags: ["PC"],
     category: "hardware",
-    price: 32433,
+    price: 36325,
+    unitLabel: "por equipo",
+    discountEligible: true,
     desc: "Limpieza interna y renovación de pasta térmica del procesador."
   },
   {
@@ -172,15 +207,19 @@ const services = [
     name: "Limpieza + cambio de pasta térmica (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 36325,
-    desc: "Desarme de notebook, limpieza de cooler y cambio de pasta térmica."
+    price: 40684,
+    unitLabel: "por equipo",
+    discountEligible: true,
+    desc: "Desarme, limpieza de cooler y cambio de pasta térmica."
   },
   {
     id: "cambio-flex",
     name: "Cambio de flex (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 23352,
+    price: 26154,
+    unitLabel: "por reparación",
+    discountEligible: true,
     desc: "Reemplazo del flex de video u otros flex internos dañados."
   },
   {
@@ -188,39 +227,39 @@ const services = [
     name: "Cambio de pantalla (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 25946,
-    desc: "Reemplazo de pantalla rota o con fallas."
+    price: 29060,
+    unitLabel: "mano de obra",
+    discountEligible: false,
+    desc: "Reemplazo de pantalla rota o con fallas (pantalla no incluida)."
   },
   {
     id: "cambio-teclado",
     name: "Cambio de teclado (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 20757,
-    desc: "Cambio de teclado completo en notebooks."
+    price: 23248,
+    unitLabel: "mano de obra",
+    discountEligible: false,
+    desc: "Cambio de teclado completo en notebooks (repuesto no incluido)."
   },
   {
     id: "despiece-notebook",
     name: "Despiece + cambio de componentes internos (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 46703,
+    price: 52307,
+    unitLabel: "por trabajo",
+    discountEligible: false,
     desc: "Desarme completo para cambio de componentes internos."
-  },
-  {
-    id: "reflow",
-    name: "Reflow de placa madre (PC/Notebook)",
-    tags: ["PC", "Notebook"],
-    category: "hardware",
-    price: 70000,
-    desc: "Trabajo avanzado sobre placa madre (casos específicos)."
   },
   {
     id: "cambio-pin",
     name: "Cambio de pin de carga (Notebook)",
     tags: ["Notebook"],
     category: "hardware",
-    price: 38919,
+    price: 43589,
+    unitLabel: "por reparación",
+    discountEligible: false,
     desc: "Reparación del conector de carga en notebooks."
   },
 
@@ -230,13 +269,17 @@ const services = [
     name: "Configuración de router / access point in situ",
     tags: ["PC", "Notebook"],
     category: "redes",
-    price: 25946,
-    desc: "Configuración de red WiFi y cableada para tus equipos."
+    price: 29060,
+    unitLabel: "por visita",
+    discountEligible: true,
+    desc: "Configuración de red WiFi/cableada y verificación de conectividad."
   }
 ];
 
-// --- DOM ---
+console.log("PixelGame IT JS cargado");
+console.log("Servicios:", services.length);
 
+// ------------------ DOM ------------------
 const servicesGrid = document.getElementById("services-grid");
 const categoryButtons = document.querySelectorAll(".pg-category");
 
@@ -247,10 +290,19 @@ const cartTotalEl = document.getElementById("cart-total");
 const sendWhatsappBtn = document.getElementById("send-whatsapp");
 const whatsappHeroBtn = document.getElementById("whatsapp-hero");
 
+// Selector guiado
+const pickerEquipment = document.getElementById("picker-equipment");
+const pickerCategory = document.getElementById("picker-category");
+const pickerService = document.getElementById("picker-service");
+const pickerQty = document.getElementById("picker-qty");
+const pickerNotes = document.getElementById("picker-notes");
+const pickerSummary = document.getElementById("picker-summary");
+const pickerAddBtn = document.getElementById("picker-add");
+const pickerSendBtn = document.getElementById("picker-send");
+
 let cart = [];
 
-// ---- UTILIDADES ----
-
+// ------------------ UTILIDADES ------------------
 function formatCurrency(value) {
   try {
     return new Intl.NumberFormat("es-AR", {
@@ -259,12 +311,24 @@ function formatCurrency(value) {
       maximumFractionDigits: 0
     }).format(value);
   } catch {
-    return `$${value.toLocaleString("es-AR")}`;
+    return `$${Number(value || 0).toLocaleString("es-AR")}`;
   }
 }
 
-// ---- RENDER SERVICIOS ----
+function serviceMatchesEquipment(service, equipmentValue) {
+  if (!equipmentValue || equipmentValue === "any") return true;
+  return service.tags.includes(equipmentValue);
+}
 
+function getFilteredServices(category, equipment) {
+  return services.filter(s => {
+    const byCategory = category === "all" ? true : s.category === category;
+    const byEquipment = serviceMatchesEquipment(s, equipment);
+    return byCategory && byEquipment;
+  });
+}
+
+// ------------------ RENDER SERVICIOS ------------------
 function createServiceRow(service) {
   const tagsHtml = service.tags
     .map(tag => {
@@ -281,41 +345,43 @@ function createServiceRow(service) {
       <div class="pg-service-row__main">
         <h3>${title}</h3>
         <p class="pg-service-row__desc">${service.desc}</p>
-        <div class="pg-service-row__tags">
-          ${tagsHtml}
-        </div>
+        <div class="pg-service-row__tags">${tagsHtml}</div>
       </div>
       <div class="pg-service-row__side">
         <div class="pg-service-row__price">
           ${formatCurrency(service.price)}
-          <span>precio freelance</span>
+          <span>${service.unitLabel || "precio freelance"}</span>
         </div>
-        <button class="pg-service-row__btn" data-add="${service.id}">
-          Agregar
-        </button>
+        <button class="pg-service-row__btn" data-add="${service.id}">Agregar</button>
       </div>
     </article>
   `;
 }
 
 function renderServices(category = "all") {
-  const filtered = services.filter(s =>
-    category === "all" ? true : s.category === category
-  );
+  const filtered = services.filter(s => (category === "all" ? true : s.category === category));
   servicesGrid.innerHTML = filtered.map(createServiceRow).join("");
 }
 
-// ---- CARRITO ----
-
-function addToCart(id) {
+// ------------------ CARRITO ------------------
+function addToCart(id, qty = 1) {
   const svc = services.find(s => s.id === id);
   if (!svc) return;
 
+  const n = Math.max(1, Number(qty || 1));
   const existing = cart.find(item => item.id === id);
+
   if (existing) {
-    existing.qty += 1;
+    existing.qty += n;
   } else {
-    cart.push({ id: svc.id, name: svc.name, price: svc.price, qty: 1 });
+    cart.push({
+      id: svc.id,
+      name: svc.name,
+      price: svc.price,
+      qty: n,
+      discountEligible: svc.discountEligible !== false,
+      unitLabel: svc.unitLabel || "precio freelance"
+    });
   }
   renderCart();
 }
@@ -331,7 +397,7 @@ function cartSubtotal() {
 
 function cartDiscount() {
   return cart.reduce((sum, item) => {
-    if (item.qty >= DISCOUNT_THRESHOLD) {
+    if (item.discountEligible && item.qty >= DISCOUNT_THRESHOLD) {
       sum += item.price * item.qty * DISCOUNT_RATE;
     }
     return sum;
@@ -339,95 +405,137 @@ function cartDiscount() {
 }
 
 function cartTotal() {
-  const subtotal = cartSubtotal();
-  const discount = cartDiscount();
-  return Math.max(0, subtotal - discount);
+  return Math.max(0, cartSubtotal() - cartDiscount());
 }
 
 function renderCart() {
   if (cart.length === 0) {
-    cartItemsEl.innerHTML =
-      '<li class="pg-cart__empty">Todavía no agregaste servicios.</li>';
+    cartItemsEl.innerHTML = '<li class="pg-cart__empty">Todavía no agregaste servicios.</li>';
     cartSubtotalEl.textContent = "$0";
     cartDiscountEl.textContent = "-$0";
     cartTotalEl.textContent = "$0";
     return;
   }
 
-  const itemsHtml = cart
-    .map(
-      item => `
+  cartItemsEl.innerHTML = cart
+    .map(item => `
       <li class="pg-cart__item">
         <div class="pg-cart__main">
           <span class="pg-cart__name">${item.name}</span>
-          <span class="pg-cart__meta">
-            x${item.qty} · ${formatCurrency(item.price)} c/u
-          </span>
+          <span class="pg-cart__meta">x${item.qty} · ${formatCurrency(item.price)} c/u</span>
         </div>
         <div class="pg-cart__side">
           <span class="pg-badge-qty">${item.qty}</span>
-          <button class="pg-cart__remove" data-remove="${item.id}" title="Quitar">
-            ✕
-          </button>
+          <button class="pg-cart__remove" data-remove="${item.id}" title="Quitar">✕</button>
         </div>
       </li>
-    `
-    )
+    `)
     .join("");
-
-  cartItemsEl.innerHTML = itemsHtml;
 
   const subtotal = cartSubtotal();
   const discount = cartDiscount();
   const total = cartTotal();
 
   cartSubtotalEl.textContent = formatCurrency(subtotal);
-  cartDiscountEl.textContent =
-    discount > 0 ? "-" + formatCurrency(discount) : "-$0";
+  cartDiscountEl.textContent = discount > 0 ? `-${formatCurrency(discount)}` : "-$0";
   cartTotalEl.textContent = formatCurrency(total);
 }
 
-// ---- WHATSAPP ----
+// ------------------ WHATSAPP ------------------
+function buildWhatsappMessage(extra = {}) {
+  const equipment = extra.equipment || "PC / Notebook";
+  const notes = (extra.notes || "").trim();
 
-function buildWhatsappMessage() {
-  if (cart.length === 0) {
-    return "Hola, quiero consultar por un servicio técnico para mi PC/notebook. Todos los trabajos incluyen 3 meses de garantía.";
+  if (cart.length === 0 && !extra.singleService) {
+    let base = "Hola, quiero consultar por un servicio técnico.\n";
+    base += `Equipo: ${equipment}\n`;
+    if (notes) base += `Detalle: ${notes}\n`;
+    base += "Todos los trabajos incluyen 3 meses de garantía sobre la reparación.\n";
+    return base;
+  }
+
+  // Caso: consulta directa desde el selector sin carrito
+  if (extra.singleService) {
+    const svc = services.find(s => s.id === extra.singleService.id);
+    const qty = Math.max(1, Number(extra.singleService.qty || 1));
+    let msg = "Hola, quiero pedir presupuesto por este servicio:\n";
+    if (svc) {
+      msg += `- ${svc.name} (x${qty}) - ${formatCurrency(svc.price * qty)}\n`;
+    }
+    msg += `Equipo: ${equipment}\n`;
+    if (notes) msg += `Detalle: ${notes}\n`;
+    msg += "Incluye 3 meses de garantía sobre la reparación.\n";
+    return msg;
   }
 
   const subtotal = cartSubtotal();
   const discount = cartDiscount();
   const total = cartTotal();
 
-  let msg = "Hola, quiero pedir presupuesto por estos servicios:%0A";
+  let msg = "Hola, quiero pedir presupuesto por estos servicios:\n";
   cart.forEach(item => {
-    msg += `- ${item.name} (x${item.qty}) - ${formatCurrency(
-      item.price * item.qty
-    )}%0A`;
+    msg += `- ${item.name} (x${item.qty}) - ${formatCurrency(item.price * item.qty)}\n`;
   });
 
-  msg += `%0ASubtotal: ${formatCurrency(subtotal)}%0A`;
+  msg += `\nSubtotal: ${formatCurrency(subtotal)}\n`;
   if (discount > 0) {
-    msg += `Descuento por cantidad (${DISCOUNT_RATE * 100}% desde ${DISCOUNT_THRESHOLD} equipos iguales): -${formatCurrency(
-      discount
-    )}%0A`;
+    msg += `Descuento por cantidad (${DISCOUNT_RATE * 100}% desde ${DISCOUNT_THRESHOLD} unidades iguales): -${formatCurrency(discount)}\n`;
   }
-  msg += `Total estimado: ${formatCurrency(total)}%0A`;
-  msg += "%0AEquipo(s): PC / Notebook";
-  msg += "%0AIncluye 3 meses de garantía sobre la reparación.";
+  msg += `Total estimado: ${formatCurrency(total)}\n`;
+  msg += `\nEquipo: ${equipment}\n`;
+  if (notes) msg += `Detalle: ${notes}\n`;
+  msg += "Incluye 3 meses de garantía sobre la reparación.\n";
 
   return msg;
 }
 
-function openWhatsapp() {
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    decodeURIComponent(buildWhatsappMessage())
-  )}`;
+function openWhatsapp(message) {
+  const text = encodeURIComponent(message);
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
   window.open(url, "_blank");
 }
 
-// ---- EVENTOS ----
+// ------------------ SELECTOR GUIADO ------------------
+function populatePickerServices() {
+  const cat = pickerCategory?.value || "all";
+  const eq = pickerEquipment?.value || "any";
 
-// Categorías
+  const filtered = getFilteredServices(cat, eq);
+
+  if (!pickerService) return;
+  pickerService.innerHTML = `<option value="" selected disabled>Seleccioná un servicio…</option>` +
+    filtered
+      .map(s => `<option value="${s.id}">${s.name}</option>`)
+      .join("");
+
+  updatePickerSummary();
+}
+
+function updatePickerSummary() {
+  if (!pickerSummary) return;
+
+  const id = pickerService?.value;
+  if (!id) {
+    pickerSummary.textContent = "Elegí un servicio para ver el precio estimado.";
+    return;
+  }
+
+  const svc = services.find(s => s.id === id);
+  if (!svc) {
+    pickerSummary.textContent = "Servicio no encontrado.";
+    return;
+  }
+
+  const qty = Math.max(1, Number(pickerQty?.value || 1));
+  const total = svc.price * qty;
+
+  pickerSummary.innerHTML = `<strong>${svc.name}</strong> · ${formatCurrency(svc.price)} (${svc.unitLabel || "precio freelance"}) · ` +
+    `<strong>Total:</strong> ${formatCurrency(total)}`;
+}
+
+// ------------------ EVENTOS ------------------
+
+// Categorías sidebar
 categoryButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     categoryButtons.forEach(b => b.classList.remove("pg-category--active"));
@@ -441,7 +549,7 @@ categoryButtons.forEach(btn => {
 servicesGrid.addEventListener("click", e => {
   const btn = e.target.closest("[data-add]");
   if (!btn) return;
-  addToCart(btn.dataset.add);
+  addToCart(btn.dataset.add, 1);
 });
 
 // Click en carrito (quitar)
@@ -451,10 +559,54 @@ cartItemsEl.addEventListener("click", e => {
   removeFromCart(btn.dataset.remove);
 });
 
-// Botones WhatsApp
-sendWhatsappBtn.addEventListener("click", openWhatsapp);
-whatsappHeroBtn.addEventListener("click", openWhatsapp);
+// Botones WhatsApp existentes
+sendWhatsappBtn.addEventListener("click", () => {
+  const equipment = pickerEquipment ? pickerEquipment.value : "any";
+  const eqLabel = equipment === "any" ? "PC / Notebook" : equipment;
+  openWhatsapp(buildWhatsappMessage({ equipment: eqLabel, notes: pickerNotes?.value || "" }));
+});
 
-// ---- INIT ----
+whatsappHeroBtn.addEventListener("click", () => {
+  const equipment = pickerEquipment ? pickerEquipment.value : "any";
+  const eqLabel = equipment === "any" ? "PC / Notebook" : equipment;
+  openWhatsapp(buildWhatsappMessage({ equipment: eqLabel, notes: pickerNotes?.value || "" }));
+});
+
+// Selector guiado: cambios
+pickerEquipment?.addEventListener("change", populatePickerServices);
+pickerCategory?.addEventListener("change", populatePickerServices);
+pickerService?.addEventListener("change", updatePickerSummary);
+pickerQty?.addEventListener("input", updatePickerSummary);
+
+// Selector guiado: acciones
+pickerAddBtn?.addEventListener("click", () => {
+  const id = pickerService?.value;
+  if (!id) return;
+  addToCart(id, pickerQty?.value || 1);
+});
+
+pickerSendBtn?.addEventListener("click", () => {
+  const id = pickerService?.value;
+  if (!id) {
+    const equipment = pickerEquipment ? pickerEquipment.value : "any";
+    const eqLabel = equipment === "any" ? "PC / Notebook" : equipment;
+    openWhatsapp(buildWhatsappMessage({ equipment: eqLabel, notes: pickerNotes?.value || "" }));
+    return;
+  }
+
+  const equipment = pickerEquipment ? pickerEquipment.value : "any";
+  const eqLabel = equipment === "any" ? "PC / Notebook" : equipment;
+
+  openWhatsapp(
+    buildWhatsappMessage({
+      equipment: eqLabel,
+      notes: pickerNotes?.value || "",
+      singleService: { id, qty: pickerQty?.value || 1 }
+    })
+  );
+});
+
+// ------------------ INIT ------------------
 renderServices("all");
 renderCart();
+populatePickerServices();
