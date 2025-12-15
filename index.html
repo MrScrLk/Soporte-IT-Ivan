@@ -97,6 +97,72 @@
         </div>
       </div>
 
+      <!-- SELECTOR GUIADO -->
+<section class="pg-picker" aria-label="Elegir servicio">
+  <div class="pg-picker__header">
+    <h3>Elegí tu servicio</h3>
+    <p class="pg-picker__subtitle">
+      Seleccioná el tipo de equipo, el servicio y la cantidad. Se agrega al carrito y podés enviarlo por WhatsApp.
+    </p>
+  </div>
+
+  <div class="pg-picker__grid">
+    <div class="pg-picker__field">
+      <label for="picker-equipment">Equipo</label>
+      <select id="picker-equipment" class="pg-input">
+        <option value="any">PC o Notebook</option>
+        <option value="PC">PC escritorio / Gamer</option>
+        <option value="Notebook">Notebook</option>
+      </select>
+    </div>
+
+    <div class="pg-picker__field">
+      <label for="picker-category">Categoría</label>
+      <select id="picker-category" class="pg-input">
+        <option value="all">Todos</option>
+        <option value="mantenimiento">Mantenimiento / sistema</option>
+        <option value="hardware">Hardware &amp; mejoras</option>
+        <option value="visita">Visitas y soporte remoto</option>
+        <option value="redes">Redes y conectividad</option>
+      </select>
+    </div>
+
+    <div class="pg-picker__field">
+      <label for="picker-service">Servicio</label>
+      <select id="picker-service" class="pg-input">
+        <option value="" selected disabled>Seleccioná un servicio…</option>
+      </select>
+    </div>
+
+    <div class="pg-picker__field">
+      <label for="picker-qty">Cantidad</label>
+      <input id="picker-qty" class="pg-input" type="number" min="1" value="1" />
+    </div>
+  </div>
+
+  <div class="pg-picker__bottom">
+    <div class="pg-picker__summary" id="picker-summary">
+      Elegí un servicio para ver el precio estimado.
+    </div>
+
+    <div class="pg-picker__actions">
+      <button id="picker-add" class="pg-btn pg-btn--primary pg-btn--small" type="button">
+        Agregar al carrito
+      </button>
+      <button id="picker-send" class="pg-btn pg-btn--small" type="button">
+        Consultar por WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <div class="pg-picker__field pg-picker__field--full">
+    <label for="picker-notes">Detalles (opcional)</label>
+    <textarea id="picker-notes" class="pg-input pg-input--textarea" rows="3"
+      placeholder="Ej: se apaga al jugar, hace ruido el cooler, quiero formateo con backup, zona/barrio, etc."></textarea>
+  </div>
+</section>
+
+
       <div class="pg-services-layout">
         <!-- Menú de categorías -->
         <aside class="pg-services__sidebar">
@@ -127,7 +193,6 @@
         <!-- Lista de servicios -->
         <section class="pg-services">
           <div id="services-grid" class="pg-services__list">
-            <!-- JS inyecta las filas de servicio -->
           </div>
         </section>
 
